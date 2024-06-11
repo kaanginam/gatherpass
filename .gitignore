@@ -1,0 +1,5 @@
+conf.json
+*/__pycache__/**
+__pycache__/**
+password_list.txt
+passfinder.db

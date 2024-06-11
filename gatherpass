@@ -1,0 +1,7 @@
+#!/bin/bash
+while :
+do
+  python3 google_paste_scraper.py
+  # python3 forum_scraper.py
+  sleep 5m
+done
