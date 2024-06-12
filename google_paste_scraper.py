@@ -27,23 +27,29 @@ def main():
                 pasteurl = a['href'].split('&')[0].split('=')[1]
                 
                 pasteid = pasteurl.split('/')[-1]
-                filename = f"{p}_{pasteid}.txt"
+                filename = f"{p['site']}_{pasteid}.txt"
                 results.append(filename)
-                urllib.request.urlretrieve(f"https://{p}/{p['dl'] + pasteid}", filename) 
-        for fn in results:
-            text = open(fn).read()
-            r = paste_parser.has_credentials(text)
-            if r == 1:
-                print(f"A commonly used password was found on {p['site']}: {pasteurl}. Adding to list")
-                db.add_accounts_from_file(text=text, source=p['site'], pasteid=pasteid, parser=paste_parser)
-            elif r == 2:
-                print(f"A commonly used e-mail service provider was found on {p['site']}: {pasteurl}. Adding to list")
-                db.add_accounts_from_file(text=text, source=p['site'], pasteid=pasteid, parser=paste_parser)
-            elif r == 3:
-                print(f"A commonly used table format was found on {p['site']}: {pasteurl}. Adding to list")
-                db.add_accounts_from_file(text=text, source=p['site'], pasteid=pasteid, parser=paste_parser)
-            else:
-                print(f"Unsuccesful finding a password, renaming to {fn}_F")
-                os.rename(fn, f'{fn}_F')
+                #print(f"https://{p['site']}/{p['dl']}{str(pasteid)}")
+                # breakpoint()
+                # urllib.request.urlretrieve(f"https://{p['site']}/{p['dl']}{str(pasteid)}", filename) 
+                res = requests.get(f"https://{p['site']}/{p['dl']}{str(pasteid)}")
+                
+                text = res.text
+                # NOTE: SAVING FILE FOR CHECKING RESULTS
+                with open(filename, 'w') as f:
+                    f.write(text)
+                r = paste_parser.has_credentials(text)
+                if r == 1:
+                    print(f"A commonly used password was found on {p['site']}: {pasteurl}. Adding to list")
+                    db.add_accounts_from_file(text=text, source=p['site'], pasteid=pasteid, parser=paste_parser)
+                elif r == 2:
+                    print(f"A commonly used e-mail service provider was found on {p['site']}: {pasteurl}. Adding to list")
+                    db.add_accounts_from_file(text=text, source=p['site'], pasteid=pasteid, parser=paste_parser)
+                elif r == 3:
+                    print(f"A commonly used table format was found on {p['site']}: {pasteurl}. Adding to list")
+                    db.add_accounts_from_file(text=text, source=p['site'], pasteid=pasteid, parser=paste_parser)
+                else:
+                    print(f"Unsuccesful finding a password, renaming to {filename}_F")
+                    os.rename(filename, f'{filename}_F')
 if __name__ == "__main__":
     main()

@@ -6,9 +6,8 @@ class LeakParser:
         self.config = config
     def check_patterns(self, string):
         retcode = 0
-        for sep in self.config.get_separators():
+        for sep in self.config.get_seperators():
             p = re.compile(f"[^{sep}]*" + sep + f"{1}[^sep]*")
-            
             if p.match(string):
                 return retcode, sep
             retcode += 1
