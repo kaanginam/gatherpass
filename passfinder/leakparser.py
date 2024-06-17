@@ -20,13 +20,25 @@ class LeakParser:
         for prov in self.providers:
             if prov in text:
                 retcode =  2
-        lines = text.split('\n')
-        for line in lines:
-            line_mod = line.strip()
-            if len(self.check_patterns(line_mod)) > 1:
-                retcode = 3
-                break
+        # lines = text.split('\n')
+        #for line in lines:
+        #    line_mod = line.strip()
+        #    if len(self.check_patterns(line_mod)) > 1:
+        #        retcode = 3
+        #        break
         return retcode
+    def guess_n(self, text):
+        return round(len(text.split('\n'))*self.config.get_ratio())
+    def has_credentials_n(self, text):
+        cnt = 0
+        n = self.guess_n(text)
+        for pw in self.passlist:
+            if pw in text:
+                cnt += 1
+        if cnt >= n:
+            return True
+        else:
+            return False
     def get_lines(self, filename):
         with open(filename, 'r') as f:
             return f.readlines()

@@ -22,8 +22,11 @@ def main():
         res = requests.get(f'https://{page}', cookies = cookies )
         soup = BeautifulSoup(res.text)#, features=html.parser)
         results = []
-        for a in soup.find_all('a', href=True):
-            if f"https://{p['site']}" in a['href']:
+        href_list = soup.find_all('a', href=True)
+        for a in href_list:
+            url = a['href']
+            # print(url)
+            if f"https://{p['site']}" in url:
                 pasteurl = a['href'].split('&')[0].split('=')[1]
                 
                 pasteid = pasteurl.split('/')[-1]
@@ -33,23 +36,19 @@ def main():
                 # breakpoint()
                 # urllib.request.urlretrieve(f"https://{p['site']}/{p['dl']}{str(pasteid)}", filename) 
                 res = requests.get(f"https://{p['site']}/{p['dl']}{str(pasteid)}")
-                
+                #print(f"https://{p['site']}/{p['dl']}{str(pasteid)}")
+                #breakpoint()
                 text = res.text
                 # NOTE: SAVING FILE FOR CHECKING RESULTS
                 with open(filename, 'w') as f:
                     f.write(text)
-                r = paste_parser.has_credentials(text)
-                if r == 1:
+                #r = paste_parser.has_credentials_n(text)
+                if paste_parser.has_credentials_n(text):
                     print(f"A commonly used password was found on {p['site']}: {pasteurl}. Adding to list")
-                    db.add_accounts_from_file(text=text, source=p['site'], pasteid=pasteid, parser=paste_parser)
-                elif r == 2:
-                    print(f"A commonly used e-mail service provider was found on {p['site']}: {pasteurl}. Adding to list")
-                    db.add_accounts_from_file(text=text, source=p['site'], pasteid=pasteid, parser=paste_parser)
-                elif r == 3:
-                    print(f"A commonly used table format was found on {p['site']}: {pasteurl}. Adding to list")
-                    db.add_accounts_from_file(text=text, source=p['site'], pasteid=pasteid, parser=paste_parser)
+                    #db.add_accounts_from_file(text=text, source=p['site'], pasteid=pasteid, parser=paste_parser)
+                    os.rename(filename, f'T_{filename}')
                 else:
                     print(f"Unsuccesful finding a password, renaming to {filename}_F")
-                    os.rename(filename, f'{filename}_F')
+                    os.rename(filename, f'F_{filename}')
 if __name__ == "__main__":
     main()

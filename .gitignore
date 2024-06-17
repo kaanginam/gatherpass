@@ -4,3 +4,8 @@ __pycache__/**
 password_list.txt
 passfinder.db
 pastebin.com*
+100pastes/*
+100pastes*
+downloaded_files/** 
+T_*
+F_*

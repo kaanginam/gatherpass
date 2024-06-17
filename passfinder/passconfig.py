@@ -20,3 +20,5 @@ class PassConfig:
         return self.config['separators']
     def get_forums(self) -> None:
         return self.config['forums']
+    def get_ratio(self) -> None:
+        return self.config['ratio']
