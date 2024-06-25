@@ -5,12 +5,12 @@ import urllib.request
 import cloudscraper
 # https://www.coursehero.com/file/102140146/LISTtxt/
 from selenium import webdriver
-from passfinder.leakparser import LeakParser
-from passfinder.passconfig import PassConfig
-from passfinder.passsoup import PassSoup
-from passfinder.forumscraper import ForumScraper
+from passscrape.leakparser import LeakParser
+from passscrape.passconfig import PassConfig
+from passscrape.passsoup import PassSoup
+from passscrape.forumscraper import ForumScraper
 import os
-from passfinder.passdb import PassDB
+from passscrape.passdb import PassDB
 #browser = webdriver.Chrome()
 today = date.today()
 config = PassConfig('./conf.json')
@@ -19,11 +19,15 @@ scraper = cloudscraper.create_scraper()
 from seleniumbase import BaseCase
 case = BaseCase()
 # https://www.nulled.to/topic/1620375-81k-leak-website-dump-top-hashed/
+def scrape(forum):
+    parser = LeakParser(config.get_passlist(), config.get_providers(), config)
+    scr = ForumScraper(forum, config.get_urls_to_gather(), parser)
+    scr.scrape()
 def page_list(forum):
-    scr = ForumScraper(forum)
+    scr = ForumScraper(forum, config.get_urls_to_gather())
     scr.scrape()
     #driver.quit()
-    breakpoint()
+    # breakpoint()
 def new_posts(forum):
     res = page_list(forum)
     #source = forum['name']
@@ -49,12 +53,11 @@ def new_posts(forum):
             print(a)
     """
 def main():
-    
-    parser = LeakParser(config.get_passlist(), config.get_providers(), config)
+    # parser = LeakParser(config.get_passlist(), config.get_providers(), config)
     for forum in config.get_forums():
         if 'nulled' in forum['name']:
             continue
-        new = new_posts(forum=forum)
+        scrape(forum)
     
 if __name__ == "__main__":
     main()

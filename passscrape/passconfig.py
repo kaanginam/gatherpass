@@ -22,3 +22,5 @@ class PassConfig:
         return self.config['forums']
     def get_ratio(self) -> None:
         return self.config['ratio']
+    def get_urls_to_gather(self) -> None:
+        return self.config['urls_to_gather']

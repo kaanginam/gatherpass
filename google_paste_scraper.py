@@ -4,10 +4,10 @@ from bs4 import BeautifulSoup
 import urllib.request
 # https://www.coursehero.com/file/102140146/LISTtxt/
 from selenium import webdriver
-from passfinder.leakparser import LeakParser
-from passfinder.passconfig import PassConfig
+from passscrape.leakparser import LeakParser
+from passscrape.passconfig import PassConfig
 import os
-from passfinder.passdb import PassDB
+from passscrape.passdb import PassDB
 #browser = webdriver.Chrome()
 today = date.today()
 

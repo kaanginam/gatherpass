@@ -9,3 +9,9 @@ pastebin.com*
 downloaded_files/** 
 T_*
 F_*
+combos/**
+*.png
+combo*.txt
+forums.txt
+scraped.db
+~/*

@@ -7,6 +7,8 @@ class PassSoup:
         scraper = cloudscraper.create_scraper()
         # res = requests.get(url)
         self.soup = BeautifulSoup(scraper.get(url).text, features="html.parser")
+    def soup_existing(self, text):
+        return BeautifulSoup(text, features="html.parser")
     def get_hrefs(self):
         return self.soup.find_all('a', href=True)
     

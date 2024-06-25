@@ -1,4 +1,8 @@
 import re
+import os
+import hashlib
+import requests
+import time
 class LeakParser:
     def __init__(self, passlist, providers, config):
         self.passlist = self.get_lines(passlist)
@@ -27,14 +31,45 @@ class LeakParser:
         #        retcode = 3
         #        break
         return retcode
+    def password_in_hibp(pw):
+        hexxed = hashlib.sha1(pw.encode()).hexdigest()
+        try:
+            res = requests.get(f"https://api.pwnedpasswords.com/range/{hexxed[0:5]}")
+        except requests.exceptions.ConnectionError:
+            time.sleep(30)
+            res = requests.get(f"https://api.pwnedpasswords.com/range/{hexxed[0:5]}")
+        if res.status_code != 200:
+            print("Too many requests!!")
+            return False
+        hashlist = res.text.split('\n')
+    
+        for h in hashlist:
+            if hexxed.upper() == (hexxed[0:5].upper()+h.strip().split(":") [0]):
+                return True
+        return False
     def guess_n(self, text):
         return round(len(text.split('\n'))*self.config.get_ratio())
     def has_credentials_n(self, text):
         cnt = 0
         n = self.guess_n(text)
+        """
         for pw in self.passlist:
             if pw in text:
                 cnt += 1
+        """
+        # TODO: Check for combos
+        # Common table formats etc
+        # Otherwise: divide words
+        lines = text.split("\n")
+        words = []
+        pw_count = 0
+        
+        for line in lines:
+            if "|" in line:
+                for w in line.split("|"):
+                    if passwrod_in_hibp(w):
+                        pw_count += 1
+                    
         if cnt >= n:
             return True
         else:
