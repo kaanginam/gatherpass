@@ -11,19 +11,25 @@ class PassDB:
         return not self.fail
     def add_paste(self, source, pasteid, text):
         cursor = self.connection.cursor()
-        cursor.execute('create table if not exists pastes (source TEXT, pasteid TEXT, text TEXT, UNIQUE(source,pasteid))')
+        cursor.execute('create table if not exists pastes (source TEXT, pasteid TEXT, text TEXT, is_leak INTEGER DEFAULT 0, password TEXT DEFAULT NULL, UNIQUE(source,pasteid))')
         cursor.execute('insert or ignore into pastes (source, pasteid, text) values (?, ?, ?)', (source, pasteid, text))
         self.connection.commit()
         # cursor.execute(
     def paste_exists(self, source, pasteid):
         cursor = self.connection.cursor()
-        cursor.execute('create table if not exists pastes (source TEXT, pasteid TEXT, text TEXT, UNIQUE(source,pasteid))')
+        cursor.execute('create table if not exists pastes (source TEXT, pasteid TEXT, text TEXT, is_leak INTEGER DEFAULT 0, password TEXT DEFAULT NULL, UNIQUE(source,pasteid))')
         self.connection.commit()
         rows = cursor.execute('select * from pastes where source = ? and pasteid = ?', (source, pasteid)).fetchall()
         if len(rows) == 0:
             return False
         else:
             return True
+    def paste_is_leak(self, source, pasteid, pw):
+        cursor = self.connection.cursor()
+        cursor.execute('create table if not exists pastes (source TEXT, pasteid TEXT, text TEXT, is_leak INTEGER DEFAULT 0, password TEXT DEFAULT NULL, UNIQUE(source,pasteid))')
+        cursor.execute('update pastes set is_leak=1 where source = ? and pasteid = ?',(source, pasteid))
+        cursor.execute('update pastes set password=? where source = ? and pasteid = ?',(pw, source, pasteid))
+        self.connection.commit()
     def add_links(self, source, url):
         cursor = self.connection.cursor()
         cursor.execute('create table if not exists tlinks (source TEXT, url TEXT, UNIQUE(source,url))')

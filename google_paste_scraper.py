@@ -1,5 +1,5 @@
 import requests
-from datetime import date
+from datetime import date, timedelta
 from bs4 import BeautifulSoup
 import urllib.request
 # https://www.coursehero.com/file/102140146/LISTtxt/
@@ -9,7 +9,7 @@ from passscrape.passconfig import PassConfig
 import os
 from passscrape.passdb import PassDB
 from passscrape.googlescraper import GoogleScraper
-today = date.today()
+today = date.today() - timedelta(days=1)
 """Main function to get scraps
 
 Keyword arguments:

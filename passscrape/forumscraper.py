@@ -9,7 +9,6 @@ class ForumScraper():
     def __init__(self, forum, urls, parser):
         self.fname = forum['name']
         self.dumplist = forum['dump_list']
-        # self.driver = seleniumbase.Driver(uc=True)
         self.tid = forum['tid']
         self.luri = forum['login_uri']
         self.username = forum['username']
@@ -27,11 +26,13 @@ class ForumScraper():
         # TODO: need to document what os needs what path, and need to write that it takes about
         # 1-2 manual interactions to make it work
         #options.add_argument("--user-data-dir=~/Library/Application Support/Google/Chrome/Default")
-        options.add_argument("--user-data-dir=~/mnt/c/Users/Kaneki\\ Ken/Google/Chrome/User\\ Data")
+       # options.add_argument(r"--user-data-dir=~/mnt/c/Users/Kaneki\ Ken/AppData/Local/Google/Chrome/User\ Data")
+        #options.add_argument("--user-data-dir=~/.config/chromium/Default")
         # options.add_argument("--user-data-dir=~/data_dir/")
-        #options.add_argument("--user-data-dir=C:\\Users\\Alice\\AppData\\Local\\Google\\Chrome\\User Data")
+        #options.add_argument("--user-data-dir=C:\\Users\Kaneki Ken\\AppData\\Local\\Google\\Chrome\\User Data")
         driver = webdriver.Chrome(options=options)
         driver.get(full_url)
+        breakpoint()
         table_id = driver.find_element(By.ID, self.tid)
         rows = table_id.find_elements(By.TAG_NAME, "tr")
         for row in rows:
@@ -45,13 +46,13 @@ class ForumScraper():
                 driver.get(thread)
                 driver.find_element(By.CLASS_NAME, 'postbit_thanks add_tyl_button').click()
                 driver.find_element(By.CLASS_NAME, 'postbit_quote').click()
-                # breakpoint()
                 posts = driver.find_element(By.ID, 'posts')
                 divs = posts.find_elements(By.XPATH, '//div[@class="post_body scaleimages"]')
                 op = divs[0]
                 self.grab_links(op)
                 breakpoint()
-                if self.parser.has_credentials_n(op.text):
+                output = self.parser.has_credentials(op.text)
+                if output:
                     with open(f"T_{self.fname}_{op.get_property('id')}", "w") as f:
                         f.write(op.text) 
                 # TODO: parse leaks
