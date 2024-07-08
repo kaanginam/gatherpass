@@ -3,6 +3,8 @@ import os
 import hashlib
 import requests
 import time
+import enchant
+from bs4 import BeautifulSoup
 class LeakParser:
     def __init__(self, passlist, providers, config):
         self.passlist = self.get_lines(passlist)
@@ -24,12 +26,6 @@ class LeakParser:
         for prov in self.providers:
             if prov in text:
                 retcode =  2
-        # lines = text.split('\n')
-        #for line in lines:
-        #    line_mod = line.strip()
-        #    if len(self.check_patterns(line_mod)) > 1:
-        #        retcode = 3
-        #        break
         return retcode
     def password_in_hibp(pw):
         hexxed = hashlib.sha1(pw.encode()).hexdigest()
@@ -49,9 +45,11 @@ class LeakParser:
         return False
     def guess_n(self, text):
         return round(len(text.split('\n'))*self.config.get_ratio())
-    def has_credentials_n(self, text):
-        cnt = 0
-        n = self.guess_n(text)
+    def has_credentials_n(self, text, passlist, seperators):
+        #cnt = 0
+        #n = self.guess_n(text)
+        with open(passlist, 'r') as f:
+            passwords = f.readlines()
         """
         for pw in self.passlist:
             if pw in text:
@@ -61,19 +59,27 @@ class LeakParser:
         # Common table formats etc
         # Otherwise: divide words
         lines = text.split("\n")
-        words = []
-        pw_count = 0
         
+        pw_count = 0
+        # TODO: add password regex?
         for line in lines:
-            if "|" in line:
-                for w in line.split("|"):
-                    if passwrod_in_hibp(w):
-                        pw_count += 1
-                    
-        if cnt >= n:
-            return True
-        else:
-            return False
+            words = []
+            words.append(line)
+            if " " in line:
+                for s in line.split(" "):
+                    words.append(s)
+            for word in words:
+                for sep in seperators:
+                    if sep in word: 
+                        for s in word.split(sep):     
+                            words.append(s)
+            for word in words:
+                #if d.check(word):
+                #    continue
+                hexxed = hashlib.sha1(word.encode()).hexdigest()
+                if hexxed in passwords:
+                    return True
+        return False
     def get_lines(self, filename):
         with open(filename, 'r') as f:
             return f.readlines()

@@ -1,14 +1,10 @@
 # from seleniumbase import BaseCase
 from selenium import webdriver
-from seleniumbase import SB
 from selenium.webdriver.common.by import By
-import seleniumbase
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.chrome.options import Options
+from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
 from passscrape.passdb import PassDB
-from passscrape.passsoup import PassSoup
 from bs4 import BeautifulSoup
-from passscrape.leakparser import LeakParser
+from selenium.webdriver.support import expected_conditions as EC
 class ForumScraper():
     def __init__(self, forum, urls, parser):
         self.fname = forum['name']
@@ -21,26 +17,6 @@ class ForumScraper():
         self.urls_to_gather = urls
         self.db = PassDB()
         self.parser = parser
-    def login(self, base):
-        # click on login
-        #self = seleniumbase.Driver(uc=True)
-        
-        breakpoint()
-        with SB(uc=True, test=True, chromium_arg="--user-data-dir=~/Library/Application Support/Google/Chrome/Default") as sb:
-            sb.driver.uc_open_with_reconnect(f"{base}{self.luri}", reconnect_time=2)
-            # breakpoint()
-            
-            try:
-                if sb.driver.find_element(By.TAG_NAME, "iframe"):
-                    self.click_turnstile_and_verify(sb)
-            except Exception:
-                sb.driver.uc_open_with_reconnect(f"{base}{self.luri}", reconnect_time=2)
-                self.click_turnstile_and_verify(sb)
-            sb.driver.find_element(By.ID, "username").send_keys(self.username)
-            sb.driver.find_element(By.ID, "password").send_keys(self.password)
-            sb.driver.save_screenshot('Entered_data.png')
-            #sb.driver.uc_click()
-            sb.driver.find_element(By.XPATH, "//input[@type='button' and value='login']").uc_click()
         
     def scrape(self):
         source = self.fname
@@ -50,20 +26,15 @@ class ForumScraper():
         options = webdriver.ChromeOptions()
         # TODO: need to document what os needs what path, and need to write that it takes about
         # 1-2 manual interactions to make it work
-        options.add_argument("--user-data-dir=~/Library/Application Support/Google/Chrome/Default")
+        #options.add_argument("--user-data-dir=~/Library/Application Support/Google/Chrome/Default")
+        options.add_argument("--user-data-dir=~/mnt/c/Users/Kaneki\\ Ken/Google/Chrome/User\\ Data")
+        # options.add_argument("--user-data-dir=~/data_dir/")
+        #options.add_argument("--user-data-dir=C:\\Users\\Alice\\AppData\\Local\\Google\\Chrome\\User Data")
         driver = webdriver.Chrome(options=options)
-        # driver.get(base_url)
-        # self.open(full_url)
-        # self.click('div[id="tid-link-1623774"]')
         driver.get(full_url)
         table_id = driver.find_element(By.ID, self.tid)
         rows = table_id.find_elements(By.TAG_NAME, "tr")
-        #print(self.tid)
-        #breakpoint()
-        #elements = self.driver.find_element(By.ID, f'{self.tid}')
-        #breakpoint()
         for row in rows:
-            # breakpoint()
             try:
                 el = row.find_element(By.TAG_NAME, 'a')
                 thread = el.get_attribute('href')
@@ -71,46 +42,37 @@ class ForumScraper():
                     continue
                 else:
                     self.db.add_thread(self.fname, thread)
-                thread_driver = seleniumbase.Driver(uc=True)
-                thread_driver.get(thread)
-                posts = thread_driver.find_element(By.ID, 'posts')
+                driver.get(thread)
+                driver.find_element(By.CLASS_NAME, 'postbit_thanks add_tyl_button').click()
+                driver.find_element(By.CLASS_NAME, 'postbit_quote').click()
+                # breakpoint()
+                posts = driver.find_element(By.ID, 'posts')
                 divs = posts.find_elements(By.XPATH, '//div[@class="post_body scaleimages"]')
                 op = divs[0]
-                #header = thread_driver.find_element(By.CLASS_NAME, 'thread-header')
-                # filename = f"{self.fname}_{op.get_property('id')}.txt"
-                self.grab_links(op, thread)
+                self.grab_links(op)
+                breakpoint()
                 if self.parser.has_credentials_n(op.text):
                     with open(f"T_{self.fname}_{op.get_property('id')}", "w") as f:
                         f.write(op.text) 
-                #with open(filename, 'w') as f:
-                #    f.write(op.text)
                 # TODO: parse leaks
-                # TODO: grab telegram links
-                # self.check_for_samples(op)
-                # if 
-                thread_driver.quit()
-                # breakpoint()
-            except NoSuchElementException as e:
+            except (NoSuchElementException, StaleElementReferenceException) as e:
+                print(e)
+                print(breakpoint())
                 continue
-    def grab_links(self, op, thread):
+    def grab_links(self, op):
         soup = BeautifulSoup(op.get_attribute("innerHTML"), features="html.parser")
         hrefs = soup.find_all('a', href=True)
-        # srcs = soup.find_all('img')
         for url in self.urls_to_gather:
             for href in hrefs:
                 if url in href['href']:
                     self.db.add_links(self.fname, href['href'])
-    # def reply(self, c):
-    #    c.click()
-    
-    #def ()
-    # from seleniumbase docs
+    def reply_to_thread(self, driver):
+        # TODO: find reply button, choose a reply, then reload page after reply
+        # driver.
+        print('driver')
     def click_turnstile_and_verify(self, sb):
         sb.switch_to_frame("iframe")
         sb.driver.uc_click("span")
         sb.assert_element("div#recaptcha-checkbox-checkmark", timeout=3)
     def check_for_samples(self, op):
         breakpoint()
-        #if 'sample' in op.text:
-        #    print('sample')
-        

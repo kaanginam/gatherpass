@@ -22,12 +22,16 @@ def password_in_hibp(pw):
 os.chdir("combos")
 numspw = 0
 numslines = 0
+ratios = 0
 fns = os.listdir("./")
-print(fns)
+#print(fns)
+with open('../password_list_hashes.txt', 'r') as f:
+    passhashs = f.read().splitlines()
 for fn in fns:
     num_passw = 0
     mail_count = 0
-    with open(fn, 'r') as f:
+    print(fn)
+    with open(fn, 'r', encoding="utf8") as f:
         lines = f.readlines()
         num_lines = len(lines)
         if num_lines == 0:
@@ -47,11 +51,20 @@ for fn in fns:
             continue
         if "@" in line:
             mail_count += 1
-        if password_in_hibp(pw_in_line):
+        try:
+            hexxed = hashlib.sha1(pw_in_line.encode()).hexdigest()
+        except UnicodeDecodeError as e:
+            print(e)
+            breakpoint()
+        if hexxed.upper() in passhashs:
             num_passw += 1
+        #if password_in_hibp(pw_in_line):
+        #    num_passw += 1
         #time.sleep(3)
+    ratios += num_passw/num_lines
     print(f'The filename {fn} had a total of {num_lines} lines and {num_passw} passwords. Ratio: {num_passw/num_lines}. Mails: {mail_count}')
     numspw += num_passw
     numslines += num_lines
-print(f'Average: {numspw/len(fns)} passwords, {numslines/len(fns)} lines')
+    
+print(f'Average: {numspw/len(fns)} passwords, {numslines/len(fns)} lines, {ratios/len(fns)} ratio')
             

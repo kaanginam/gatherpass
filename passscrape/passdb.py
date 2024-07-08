@@ -12,7 +12,7 @@ class PassDB:
     def add_paste(self, source, pasteid, text):
         cursor = self.connection.cursor()
         cursor.execute('create table if not exists pastes (source TEXT, pasteid TEXT, text TEXT, UNIQUE(source,pasteid))')
-        cursor.execute('insert or ignore into pastes (source, pasteid, text) values (?, ?, ?)', (source, url, text))
+        cursor.execute('insert or ignore into pastes (source, pasteid, text) values (?, ?, ?)', (source, pasteid, text))
         self.connection.commit()
         # cursor.execute(
     def paste_exists(self, source, pasteid):
