@@ -19,3 +19,4 @@ password_list_hashes*
 /password_list_hashes.txt
 top10000*
 *.db
+selenium_test.py

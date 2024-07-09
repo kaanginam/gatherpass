@@ -4,24 +4,16 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
 from passscrape.passdb import PassDB
 from bs4 import BeautifulSoup
-from selenium.webdriver.support import expected_conditions as EC
 class ForumScraper():
-    def __init__(self, forum, urls, parser):
-        self.fname = forum['name']
-        self.dumplist = forum['dump_list']
-        self.tid = forum['tid']
-        self.luri = forum['login_uri']
-        self.username = forum['username']
-        self.password = forum['password']
+    def __init__(self, urls, parser, config):
         self.urls_to_gather = urls
         self.db = PassDB()
         self.parser = parser
-        
-    def scrape(self):
-        source = self.fname
+        self.config = config
+    def scrape(self, forum):
+        source = forum['name']
         base_url = f"https://{source}"
-        full_url = f"{base_url}{self.dumplist}"
-        result = ''
+        full_url = f"{base_url}{forum['dump_list']}"
         options = webdriver.ChromeOptions()
         # TODO: need to document what os needs what path, and need to write that it takes about
         # 1-2 manual interactions to make it work
@@ -30,43 +22,49 @@ class ForumScraper():
         #options.add_argument("--user-data-dir=~/.config/chromium/Default")
         # options.add_argument("--user-data-dir=~/data_dir/")
         #options.add_argument("--user-data-dir=C:\\Users\Kaneki Ken\\AppData\\Local\\Google\\Chrome\\User Data")
-        driver = webdriver.Chrome(options=options)
+        if self.config.get_user_data_dir():
+            options.add_argument(
+                f"--user-data-dir={self.config.get_user_data_dir()}"
+                )
+        if self.config.get_chrome_binary():
+            driver = webdriver.Chrome(self.config.get_chrome_binary(), options=options)
+        else:
+            driver = webdriver.Chrome(options=options)
         driver.get(full_url)
-        breakpoint()
-        table_id = driver.find_element(By.ID, self.tid)
+        table_id = driver.find_element(By.ID, forum['tid'])
         rows = table_id.find_elements(By.TAG_NAME, "tr")
         for row in rows:
             try:
                 el = row.find_element(By.TAG_NAME, 'a')
                 thread = el.get_attribute('href')
-                if self.db.thread_exists(self.fname, thread):
+                if self.db.thread_exists(forum['name'], thread):
                     continue
                 else:
-                    self.db.add_thread(self.fname, thread)
+                    self.db.add_thread(forum['name'], thread)
                 driver.get(thread)
-                driver.find_element(By.CLASS_NAME, 'postbit_thanks add_tyl_button').click()
-                driver.find_element(By.CLASS_NAME, 'postbit_quote').click()
-                posts = driver.find_element(By.ID, 'posts')
-                divs = posts.find_elements(By.XPATH, '//div[@class="post_body scaleimages"]')
+                #driver.find_element(By.CLASS_NAME, self.forum['thanks']).click()
+                #driver.find_element(By.CLASS_NAME, self.forum['quote']).click()
+                posts = driver.find_element(By.ID, forum['posts'])
+                divs = posts.find_elements(By.XPATH, f'//div[@class="{forum["post_body"]}"]')
                 op = divs[0]
-                self.grab_links(op)
+                self.grab_links(op, forum['name'])
                 breakpoint()
                 output = self.parser.has_credentials(op.text)
                 if output:
-                    with open(f"T_{self.fname}_{op.get_property('id')}", "w") as f:
+                    with open(f"T_{forum['name']}_{op.get_property('id')}", "w") as f:
                         f.write(op.text) 
                 # TODO: parse leaks
             except (NoSuchElementException, StaleElementReferenceException) as e:
                 print(e)
                 print(breakpoint())
                 continue
-    def grab_links(self, op):
+    def grab_links(self, op, fname):
         soup = BeautifulSoup(op.get_attribute("innerHTML"), features="html.parser")
         hrefs = soup.find_all('a', href=True)
         for url in self.urls_to_gather:
             for href in hrefs:
                 if url in href['href']:
-                    self.db.add_links(self.fname, href['href'])
+                    self.db.add_links(fname, href['href'])
     def reply_to_thread(self, driver):
         # TODO: find reply button, choose a reply, then reload page after reply
         # driver.

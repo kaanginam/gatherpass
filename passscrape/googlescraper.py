@@ -1,17 +1,13 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
 from passscrape.passdb import PassDB
 from bs4 import BeautifulSoup
-from selenium.webdriver.support import expected_conditions as EC
 import requests
 import os
 class GoogleScraper():
-    def __init__(self, cookies, today, config, db, basedir):
+    def __init__(self, cookies, today, config, basedir):
         self.cookies = cookies
         self.today = today
         self.config = config
-        self.db = db
+        self.db = PassDB()
         self.basedir = basedir
     def scrape(self, parser, p):
         req_text = f"site:{p['site']} after:{self.today}"
@@ -39,7 +35,6 @@ class GoogleScraper():
                     continue
                 # NOTE: SAVING FILE FOR CHECKING RESULTS
                 self.db.add_paste(p['site'], pasteid, text)
-                #breakpoint()
                 with open(self.basedir + filename, 'w') as f:
                     f.write(text)
                 # True positive assumed
