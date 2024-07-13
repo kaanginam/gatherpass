@@ -25,7 +25,8 @@ class LeakParser:
             return all([res.scheme, res.netloc])
         except AttributeError:
             return False
-    def has_credentials(self, text, passlist, seperators):
+    def has_credentials(self, text):
+        seperators = self.config.get_seperators()
         #cnt = 0
         #n = self.guess_n(text)
         # TODO: Check for combos

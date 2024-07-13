@@ -29,6 +29,8 @@ class PassConfig:
         return self.get_key('user_data')
     def get_chrome_binary(self) -> str:
         return self.get_key('chrome_binary')
+    def get_ntfy_topic(self) -> str:
+        return self.get_key('ntfy_topic')
     def get_key(self, key):
         try:
             value = self.config[key]

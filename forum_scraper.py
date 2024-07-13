@@ -2,7 +2,7 @@
 from passscrape.leakparser import LeakParser
 from passscrape.passconfig import PassConfig
 from passscrape.forumscraper import ForumScraper
-config = PassConfig('./conf.json')
+config = PassConfig('./conf_mac.json')
 # https://www.nulled.to/topic/1620375-81k-leak-website-dump-top-hashed/
 def main():
     parser = LeakParser(config.get_passlist(), config.get_providers(), config)

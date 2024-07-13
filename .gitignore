@@ -1,4 +1,4 @@
-conf.json
+conf*.json
 */__pycache__/**
 __pycache__/**
 password_list.txt

@@ -4,6 +4,8 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException
 from passscrape.passdb import PassDB
 from bs4 import BeautifulSoup
+from passscrape.passnotifier import notify
+import time
 class ForumScraper():
     def __init__(self, urls, parser, config):
         self.urls_to_gather = urls
@@ -35,6 +37,7 @@ class ForumScraper():
         rows = table_id.find_elements(By.TAG_NAME, "tr")
         for row in rows:
             try:
+
                 el = row.find_element(By.TAG_NAME, 'a')
                 thread = el.get_attribute('href')
                 if self.db.thread_exists(forum['name'], thread):
@@ -42,22 +45,38 @@ class ForumScraper():
                 else:
                     self.db.add_thread(forum['name'], thread)
                 driver.get(thread)
-                #driver.find_element(By.CLASS_NAME, self.forum['thanks']).click()
-                #driver.find_element(By.CLASS_NAME, self.forum['quote']).click()
-                posts = driver.find_element(By.ID, forum['posts'])
-                divs = posts.find_elements(By.XPATH, f'//div[@class="{forum["post_body"]}"]')
-                op = divs[0]
+                
+                op = self.get_op(driver, forum)
                 self.grab_links(op, forum['name'])
-                breakpoint()
+                bottom_row = op.find_element(By.XPATH, "//div[@class='post-controls']/div[@class='postbit_buttons post_management_buttons float_right']")
+                bottom_row.find_element(By.XPATH, forum['thanks']).click()
+                bottom_row.find_element(By.CLASS_NAME, forum['quote']).click()
+                
+                frame = driver.find_element(By.XPATH, forum['reply_body_iframe'])
+                driver.switch_to.frame(frame)
+                driver.find_element(By.XPATH, forum['reply_body']).send_keys(self.response())
+                driver.switch_to.default_content()
+                driver.find_element(By.XPATH, forum['reply_post']).click()
+                op = self.get_op(driver, forum)
                 output = self.parser.has_credentials(op.text)
+                notify(self.config.get_ntfy_topic(), op.text)
                 if output:
                     with open(f"T_{forum['name']}_{op.get_property('id')}", "w") as f:
                         f.write(op.text) 
+                    notify(self.config.get_ntfy_topic(), op.text)
                 # TODO: parse leaks
+                breakpoint()
+                # reasonable amount of time for user to check and then respond again
+                time.sleep(300)
             except (NoSuchElementException, StaleElementReferenceException) as e:
-                print(e)
-                print(breakpoint())
                 continue
+    def response(self):
+        return "thanks! :D"
+    def get_op(self, driver, forum):
+        posts = driver.find_element(By.ID, forum['posts'])
+        divs = posts.find_elements(By.XPATH, f'//div[@class="{forum["post_body"]}"]')
+        op = divs[0]
+        return op
     def grab_links(self, op, fname):
         soup = BeautifulSoup(op.get_attribute("innerHTML"), features="html.parser")
         hrefs = soup.find_all('a', href=True)
