@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image and Audio Effects</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #000;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+        .image-container {
+            position: absolute;
+            opacity: 0;
+            transition: opacity 2s;
+        }
+        .image-fade-in {
+            opacity: 1;
+        }
+        #image3 {
+            position: relative;
+            width: 100%; /* Full screen */
+            height: 100%; /* Full screen */
+            animation: move-left-right 5s linear infinite;
+        }
+        @keyframes move-left-right {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(100px); }
+        }
+        #text {
+            opacity: 0;
+            transition: opacity 2s;
+        }
+        img {
+            width: 760px; /* Adjusted width for larger size */
+        }
+        #image1 img {
+            width: 70%; /* 30% smaller */
+        }
+        #image3 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure the image covers the entire container */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="image1" class="image-container">
+        <img src="https://i.ibb.co/HCd7ST6/image.png" alt="Image 1">
+    </div>
+
+    <div id="image2" class="image-container">
+        <img src="https://i.ibb.co/pLcWQY0/image.png" alt="Image 2">
+    </div>
+
+    <div id="image3" class="image-container">
+        <img src="https://i.ibb.co/sqjszMH/image.png" alt="Image 3">
+    </div>
+
+    <div id="image4" class="image-container">
+        <img src="https://i.ibb.co/j37Yfmv/giphy-webp-cid-dda24d50jkvtkxvlvlf18vi25c7etd3ssyrjra5jyfyeg52i-ep-v1-gifs-related-rid-giphy.webp" alt="Image 4">
+    </div>
+
+    <div id="text">Gamerboy Webverse (Now Tonis Allinone) 2 min countdown for live event so cool</div>
+
+    <audio id="audio1" src="https://audio.jukehost.co.uk/XtAcRBaUkfoIsVnF5I9Oz71TSuuQSSru"></audio>
+    <audio id="audio2" src="https://audio.jukehost.co.uk/dI2wXqhr9fsj9lyFoZnax0kw3yJDaCXm"></audio>
+
+    <script>
+        function fadeIn(element, delay) {
+            setTimeout(() => {
+                element.classList.add('image-fade-in');
+            }, delay);
+        }
+
+        function fadeOut(element, delay) {
+            setTimeout(() => {
+                element.classList.remove('image-fade-in');
+            }, delay);
+        }
+
+        function playAudio(audio, delay) {
+            setTimeout(() => {
+                audio.play();
+            }, delay);
+        }
+
+        function showText(element, delay) {
+            setTimeout(() => {
+                element.style.opacity = 1;
+            }, delay);
+        }
+
+        const image1 = document.getElementById('image1');
+        const image2 = document.getElementById('image2');
+        const image3 = document.getElementById('image3');
+        const image4 = document.getElementById('image4');
+        const text = document.getElementById('text');
+        const audio1 = document.getElementById('audio1');
+        const audio2 = document.getElementById('audio2');
+
+        fadeIn(image1, 4000);
+        fadeOut(image1, 9000);
+        fadeIn(image2, 11000);
+        playAudio(audio1, 11000);
+        fadeOut(image2, 21000);
+        fadeIn(image3, 24000);
+        fadeOut(image3, 44000);
+        fadeIn(image4, 44000);
+        playAudio(audio2, 44000);
+        showText(text, 46000);
+    </script>
+</body>
+</html>

@@ -36,10 +36,10 @@ class GoogleScraper():
                     continue
                 # NOTE: SAVING FILE FOR CHECKING RESULTS
                 self.db.add_paste(p['site'], pasteid, text)
-                with open(self.basedir + filename, 'w') as f:
+                with open(self.basedir + filename, 'w', encoding="utf-8") as f:
                     f.write(text)
                 # True positive assumed
-                output = parser.has_credentials(text, self.config.get_seperators())
+                output = parser.has_credentials(text)
                 if output:
                     #print(f"A commonly used password was found on {p['site']}: {pasteurl}. Adding to list")
                     tpc = self.config.get_ntfy_topic()
