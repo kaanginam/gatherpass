@@ -3,7 +3,6 @@ import os
 import hashlib
 import requests
 import time
-import enchant
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 class LeakParser:

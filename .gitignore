@@ -22,6 +22,8 @@ top10000*
 selenium_test.py
 .python_packages
 .venv
+firefox-data
+user-data
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
