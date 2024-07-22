@@ -1,11 +1,15 @@
 import sqlite3
+import logging
+import os
 class PassDB:
-    def __init__(self, prefix=''):
+    def __init__(self, dbName, prefix=''):
         try:
-            self.connection = sqlite3.connect(prefix+"scraped.db")
+            logging.info("Attempting connection to database")
+            self.connection = sqlite3.connect(prefix+dbName)
             self.fail = False
         except Exception as e:
-            print(e)
+            logging.exception("Exception when trying to connect to database")
+            logging.exception(e)
             self.fail = True
     def is_connected(self):
         return not self.fail
@@ -14,6 +18,7 @@ class PassDB:
         cursor.execute('create table if not exists pastes (source TEXT, pasteid TEXT, text TEXT, is_leak INTEGER DEFAULT 0, password TEXT DEFAULT NULL, UNIQUE(source,pasteid))')
         cursor.execute('insert or ignore into pastes (source, pasteid, text) values (?, ?, ?)', (source, pasteid, text))
         self.connection.commit()
+        logging.info("Added paste")
         # cursor.execute(
     def paste_exists(self, source, pasteid):
         cursor = self.connection.cursor()
@@ -21,8 +26,10 @@ class PassDB:
         self.connection.commit()
         rows = cursor.execute('select * from pastes where source = ? and pasteid = ?', (source, pasteid)).fetchall()
         if len(rows) == 0:
+            logging.info("Paste not in database")
             return False
         else:
+            logging.info("Paste in database")
             return True
     def paste_is_leak(self, source, pasteid, pw):
         cursor = self.connection.cursor()

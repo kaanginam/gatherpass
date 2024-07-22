@@ -10,10 +10,11 @@ from passscrape.passnotifier import notify
 import time
 import logging
 import sys
+import os
 class ForumScraper():
     def __init__(self, urls, parser, config, prefix='', basedir=''):
         self.urls_to_gather = urls
-        self.db = PassDB(prefix)
+        self.db = PassDB("scraped_threads.db", prefix)
         self.parser = parser
         self.config = config
         self.basedir = basedir
@@ -49,7 +50,6 @@ class ForumScraper():
         tpc = self.config.get_ntfy_topic()
         for i in range(len(rows)):
             try:
-                breakpoint()
                 el = rows[i].find_element(By.TAG_NAME, 'a')
                 thread = el.get_attribute('href')
                 if self.db.thread_exists(forum['name'], thread):
@@ -57,11 +57,12 @@ class ForumScraper():
                 else:
                     self.db.add_thread(forum['name'], thread)
                 driver.get(thread)
-                leak_content = self.wait_for_element(driver, By.XPATH, forum['post_content']).text
+                driver.save_screenshot("frontpage.png")
+                leak_content = self.wait_for_element(driver, By.XPATH, forum['post_content'])
+                leak_content = leak_content.text
                 op = self.get_op(driver, forum)
                 self.grab_links(op, forum['name'], tpc)
                 if forum['unlike'] not in op.text:
-                    
                     logging.info("Posts was not liked")
                     bottom_row = op.find_element(By.XPATH, forum['post_bottom'])
                     logging.info("Liking")
@@ -77,7 +78,8 @@ class ForumScraper():
                     reply_button.click()
                     driver.get(thread)
                     op = self.get_op(driver, forum)
-                    leak_content = op.find_element(By.XPATH, forum['post_content']).text
+                    leak_content = op.find_element(By.XPATH, forum['post_content'])
+                    leak_content = leak_content.text
                 logging.info("Checking for actual leaks")
                 output = self.parser.has_credentials(leak_content)
                 if output:

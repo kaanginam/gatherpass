@@ -9,7 +9,7 @@ class GoogleScraper():
         self.cookies = cookies
         self.today = today
         self.config = config
-        self.db = PassDB(basedir)
+        self.db = PassDB("scraped_pastes.db", basedir)
         self.basedir = basedir
     def scrape(self, parser, p, blob):
         tpc = self.config.get_ntfy_topic()

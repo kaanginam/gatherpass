@@ -25,7 +25,7 @@ numslines = 0
 ratios = 0
 fns = os.listdir("./")
 #print(fns)
-with open('../password_list_hashes.txt', 'r') as f:
+with open('../password_list_hashes_3.txt', 'r') as f:
     passhashs = f.read().splitlines()
 for fn in fns:
     num_passw = 0
