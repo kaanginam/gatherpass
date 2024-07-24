@@ -11,9 +11,10 @@ def main():
     config = PassConfig('./conf.json')
     config.set_use_azure(False)
     cookies = config.get_cookies()
-    scraper = GoogleScraper(cookies, today, config, '/home/site/')
+    scraper = GoogleScraper(cookies, today, config, '')
     parser = LeakParser(config.get_passlist(), config.get_providers(), config)
-    blob = AzureBlobSaver('output-data')
+    blob = AzureBlobSaver(config.get_db_conn_str(), 'output-data')
+
     for p in config.get_paste_pages():
         scraper.scrape(parser, p, blob)
 if __name__ == "__main__":

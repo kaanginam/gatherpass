@@ -1,4 +1,13 @@
 import requests
+import logging
+import time
 def notify(tpc, text):
-    requests.post(tpc, 
-    data=text.encode(encoding='utf-8'))
+    try:
+        requests.post(tpc, data=text.encode(encoding='utf-8'))
+    except requests.exceptions.ConnectionError as e:
+        logging.info('Too many notifications, waiting...')
+        time.sleep(10)
+        try:
+            requests.post(tpc, data=text.encode(encoding='utf-8'))
+        except requests.exceptions.ConnectionError as e:
+            logging.error('Connection to ntfy.sh not possible')

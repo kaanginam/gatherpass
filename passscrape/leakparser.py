@@ -52,7 +52,7 @@ class LeakParser:
                 #if d.check(word):
                 #    continue
                 hexxed = hashlib.sha1(word.encode()).hexdigest()
-                if hexxed.upper() in self.passlist:
+                if hexxed.upper() in self.passlist or hexxed in self.passlist:
                     return word
         return False
     def get_lines(self, filename):

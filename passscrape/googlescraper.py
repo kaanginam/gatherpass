@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 import requests
 from passscrape.passnotifier import notify
 import logging
-from passscrape.azuredb import AzureDB
 class GoogleScraper():
     def __init__(self, cookies, today, config, basedir=''):
         self.cookies = cookies
