@@ -55,6 +55,12 @@ class LeakParser:
                 if hexxed.upper() in self.passlist or hexxed in self.passlist:
                     return word
         return False
+    def save_results(self, filename, content, source):
+        from datetime import datetime
+        ct = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+        with open(filename, 'w', encoding='utf-8') as f:
+            f.write(f'{ct} from {source}\n')
+            f.write(content)
     def get_lines(self, filename):
         with open(filename, 'r') as f:
             return f.read().splitlines()

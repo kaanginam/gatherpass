@@ -2,6 +2,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, StaleElementReferenceException, TimeoutException
 from passscrape.passdb import PassDB
@@ -18,10 +19,9 @@ class ForumScraper():
         self.parser = parser
         self.config = config
         self.basedir = basedir
-    def scrape(self, forum, blob):
+    def scrape(self, forum):
         root = logging.getLogger()
         root.setLevel(logging.INFO)
-
         handler = logging.StreamHandler(sys.stdout)
         handler.setLevel(logging.INFO)
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -36,12 +36,13 @@ class ForumScraper():
             options.add_argument(
                 f"--user-data-dir={self.config.get_user_data_dir()}"
                 )
+            options.headless = False
             options.add_argument('--headless')
             options.add_argument('--no-sandbox')
             #options.add_argument('--incognito')
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument('--remote-debugging-pipe')
-        driver = webdriver.Chrome(options=options)
+        driver = webdriver.Chrome(service=Service('./chrome'), options=options)
         logging.info("Retrieving posts")
         driver.get(full_url)
         #table_id = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.ID, forum['tid'])))
@@ -83,16 +84,12 @@ class ForumScraper():
                 logging.info("Checking for actual leaks")
                 output = self.parser.has_credentials(leak_content)
                 if output:
-                    filename = f"T_{forum['name']}_{op.get_property('id')}"
+                    filename = f"{self.basedir}T_{forum['name']}_{op.get_property('id')}"
                     notify(tpc, f'Thread {thread} is probably a leak: {leak_content} with password {output}')
                 else:
-                    filename = f"F_{forum['name']}_{op.get_property('id')}"
+                    filename = f"{self.basedir}F_{forum['name']}_{op.get_property('id')}"
                     notify(tpc, f'Got thread {thread} post with text: {leak_content}')
-                if self.config.get_use_azure():
-                    blob.upload(self.basedir, filename, op.text)
-                else:
-                    with open(f"T_{forum['name']}_{op.  get_property('id')}", "w") as f:
-                        f.write(op.text)
+                self.parser.save_results(filename, thread, forum['name'])
                 logging.info("Waiting a bit to simulate humanity")
                 time.sleep(10)
                 # Reopen page, then reload rows array. Not doing this results in an error

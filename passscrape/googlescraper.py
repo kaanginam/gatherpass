@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import requests
 from passscrape.passnotifier import notify
 import logging
+import sys
 class GoogleScraper():
     def __init__(self, cookies, today, config, basedir=''):
         self.cookies = cookies
@@ -11,6 +12,13 @@ class GoogleScraper():
         self.db = PassDB("scraped_pastes.db", basedir)
         self.basedir = basedir
     def scrape(self, parser, p, blob):
+        root = logging.getLogger()
+        root.setLevel(logging.INFO)
+        handler = logging.StreamHandler(sys.stdout)
+        handler.setLevel(logging.INFO)
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        handler.setFormatter(formatter)
+        root.addHandler(handler)
         tpc = self.config.get_ntfy_topic()
 
         req_text = f"site:{p['site']} after:{self.today}"
@@ -38,7 +46,6 @@ class GoogleScraper():
                 text = res.text
                 if self.db.paste_exists(p['site'], pasteid):
                     continue
-                
                 logging.info(f'Found a new paste')
                 # NOTE: SAVING FILE FOR CHECKING RESULTS
                 self.db.add_paste(p['site'], pasteid, text)
@@ -65,11 +72,8 @@ class GoogleScraper():
                 else:
                     #print(f"Unsuccesful finding a password, renaming to F_{filename}")
                     addition = 'F_'
-                if self.config.get_use_azure():
-                    blob.upload(self.basedir, addition + filename, text)
-                else:
-                    with open(self.basedir + addition + filename, 'w', encoding="utf-8") as f:
-                        f.write(text)
+                filename = self.basedir + addition + filename
+                parser.save_results(filename, text, p['site'])
     def grab_links(self, tpc, text, p):
         for url in self.config.get_urls_to_gather():
             logging.info(f'Trying to get {url} from paste')

@@ -1,6 +1,14 @@
 conf*.json
+combo_counting/**
+pastes_counting/**
 */__pycache__/**
 __pycache__/**
+pastesF*
+pastesT*
+dict.txt
+chrome
+chromedriver
+msg.html
 password_list.txt
 passfinder.db
 pastebin.com*
@@ -28,6 +36,7 @@ user-data
 __pycache__/
 *.py[cod]
 *$py.class
+chrome-data/**
 
 # C extensions
 *.so

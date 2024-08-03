@@ -9,9 +9,8 @@ today = date.today() - timedelta(days=1)
 
 def main():
     config = PassConfig('./conf.json')
-    config.set_use_azure(False)
     cookies = config.get_cookies()
-    scraper = GoogleScraper(cookies, today, config, '')
+    scraper = GoogleScraper(cookies, today, config, 'pastes/')
     parser = LeakParser(config.get_passlist(), config.get_providers(), config)
     blob = AzureBlobSaver(config.get_db_conn_str(), 'output-data')
 
