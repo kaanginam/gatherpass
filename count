@@ -1,0 +1,8 @@
+#!/bin/bash
+combo_dir=pastes
+for entry in "$combo_dir"/*
+do
+  echo "$entry"
+  #python count_combos_with_dict.py "$entry" &
+  python count_words_in_collected_pastes.py "$entry" &
+done

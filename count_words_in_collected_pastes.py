@@ -8,6 +8,7 @@ from urllib.parse import urlparse
 import enchant
 import datetime
 import threading
+from langdetect import detect
 with open('password_list_hashes_3.txt', 'r') as f:
     passhashs = f.read().splitlines()
 def is_url(line):
@@ -27,7 +28,11 @@ def get_words(text):
     lines = text.split("\n")
     pw_count = 0
     words = []
+    i = 0
     for line in lines:
+        if i == 0:
+            i += 1
+            continue
         if is_url(line):
             continue
         if line == '\n' or line == '':
@@ -67,36 +72,65 @@ def count_dictionary(words):
             counter += 1
     return counter
 
-def count_both(words):
+def count_both(words, lang):
     counter = 0
     counter2 = 0
-    d = enchant.Dict("en_US")
+    d = enchant.Dict(lang)
     for word in words:
         hexxed = hashlib.sha1(word.encode()).hexdigest()
         if hexxed.upper() in passhashs or hexxed in passhashs:
             counter += 1
+            print("is a pw", word)
         if d.check(word):
             counter2 += 1
+            print("is a word", word)
     return counter, counter2
-def count_from_file(filename):
-    with open('../pastes_counting/output' + filename + '.txt', 'w') as f:
-        f.write(f'Starting for file {filename} the counting')
+def count_from_file2(filename):
+    real_fn = filename.split('/')[-1].strip()
+    with open('pastes_counting2/output' + real_fn + '.txt', 'w') as f:
+        f.write(f'Starting for file {filename} the counting\n')
     with open(filename, 'r', encoding='ISO-8859-1') as f:
         text = f.read()
     words = get_words(text)
     cnt, cnt2 = count_both(words)
-    with open('../pastes_counting/output' + filename + '.txt', 'a') as f:
-        f.write(f'{filename}: pws: {cnt} dict: {cnt2}')
+    with open('pastes_counting2/output' + real_fn + '.txt', 'a') as f:
+        f.write(f'{filename}: pws: {cnt} dict: {cnt2}\n')
     
-os.chdir("pastes")
+def get_language(text):
+    res = detect(text)
+    result = ''
+    for lg in enchant._broker.list_languages():
+        if lg == res:
+            result = lg
+            break
+        elif res in lg:
+            result = lg
+            break
+    if result == '':
+        result = 'en_US'
+    return result
+def count_from_file(filename):
+    real_fn = filename.split('/')[-1].strip()
+    print(f'Starting for file {filename} the counting')
+    with open(filename, 'r') as f:
+        text = f.read()
+    lang = get_language(text)
+    
+    print(lang)
+    words = get_words(text)
+    cnt, cnt2 = count_both(words, lang)
+    print(f'{filename}: pws: {cnt} dict: {cnt2} ratio: {cnt/cnt2}')
+
 numspw = 0
 numslines = 0
 ratios = 0
-fns = os.listdir("./")
+fns = os.listdir("./pastes/")
 word_lens = 0
 pws = 0
 english = 0
 thread_list = []
-for fn in fns:
-    count_from_file(fn)
+import sys
+#for fn in fns:
+count_from_file(sys.argv[1])
+    #count_from_file(sys.argv[1])
 #print(f'Avg: Words {word_lens} Pws {pws} English {cnt2}')

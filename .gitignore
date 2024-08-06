@@ -1,6 +1,8 @@
 conf*.json
 combo_counting/**
+combo_counting2/**
 pastes_counting/**
+pastes_counting2/**
 */__pycache__/**
 __pycache__/**
 pastesF*

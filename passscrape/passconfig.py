@@ -37,6 +37,8 @@ class PassConfig:
         return self.get_key('use_azure')
     def set_use_azure(self, t) -> None:
         self.config['use_azure'] = t
+    def get_ignore_list(self) -> list:
+        return self.get_key('ignore_list')
     def get_key(self, key):
         try:
             value = self.config[key]
