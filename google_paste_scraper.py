@@ -3,8 +3,7 @@ from datetime import date, timedelta
 from passscrape.leakparser import LeakParser
 from passscrape.passconfig import PassConfig
 from passscrape.googlescraper import GoogleScraper
-from passscrape.azureblobsaver import AzureBlobSaver
-import os
+
 today = date.today() - timedelta(days=1)
 
 def main():
@@ -12,9 +11,9 @@ def main():
     cookies = config.get_cookies()
     scraper = GoogleScraper(cookies, today, config, 'pastes/')
     parser = LeakParser(config.get_passlist(), config.get_providers(), config)
-    blob = AzureBlobSaver(config.get_db_conn_str(), 'output-data')
+
 
     for p in config.get_paste_pages():
-        scraper.scrape(parser, p, blob)
+        scraper.scrape(parser, p)
 if __name__ == "__main__":
     main()

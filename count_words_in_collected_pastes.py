@@ -9,8 +9,10 @@ import enchant
 import datetime
 import threading
 from langdetect import detect
-with open('password_list_hashes_3.txt', 'r') as f:
-    passhashs = f.read().splitlines()
+from passscrape.leakparser import LeakParser
+from passscrape.passconfig import PassConfig
+#with open('password_list_hashes_3.txt', 'r') as f:
+#    passhashs = f.read().splitlines()
 def is_url(line):
     try:
         res = urlparse(line)
@@ -124,13 +126,26 @@ def count_from_file(filename):
 numspw = 0
 numslines = 0
 ratios = 0
-fns = os.listdir("./pastes/")
+
 word_lens = 0
 pws = 0
 english = 0
 thread_list = []
 import sys
+subdir = f"{sys.argv[1]}"
+fns = os.listdir(subdir)
 #for fn in fns:
-count_from_file(sys.argv[1])
+#count_from_file(sys.argv[1])
+config = PassConfig("./conf.json")
+parser = LeakParser("password_list_hashes_3.txt", config.get_providers(), config)
+for fn in fns:
+    with open(f'{subdir}{fn}', 'r', encoding='ISO-8859-1') as f:
+        text = f.read()
+    print(f'Working on {fn}')
+    rett = parser.has_credentials(text)
+    if not rett:
+        print(f'file {fn} has no leaks')
+    else:
+        print(f'file {fn} has leaks')
     #count_from_file(sys.argv[1])
 #print(f'Avg: Words {word_lens} Pws {pws} English {cnt2}')

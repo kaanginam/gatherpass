@@ -33,10 +33,6 @@ class PassConfig:
         return self.get_key('ntfy_topic')
     def get_db_conn_str(self) -> str:
         return self.get_key('db_conn_str')
-    def get_use_azure(self) -> bool:
-        return self.get_key('use_azure')
-    def set_use_azure(self, t) -> None:
-        self.config['use_azure'] = t
     def get_ignore_list(self) -> list:
         return self.get_key('ignore_list')
     def get_key(self, key):

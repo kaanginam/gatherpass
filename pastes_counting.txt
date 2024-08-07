@@ -1,0 +1,861 @@
+Working on T_pastebin.ai_84oopr9jky.txt
+0.576036866359447
+44 125
+file T_pastebin.ai_84oopr9jky.txt has leaks
+Working on T_pastebin.com_47EB872u.txt
+0.27672955974842767
+file T_pastebin.com_47EB872u.txt has no leaks
+Working on F_pastebin.com_16Qfc8wv.txt
+0.0
+file F_pastebin.com_16Qfc8wv.txt has no leaks
+Working on F_p.ip.fi_5paZ.txt
+0.08695652173913043
+file F_p.ip.fi_5paZ.txt has no leaks
+Working on F_pastebin.com_HQZDKsPx.txt
+0.25
+file F_pastebin.com_HQZDKsPx.txt has no leaks
+Working on T_pastebin.com_CH5MqiXM.txt
+0.0368809272918862
+file T_pastebin.com_CH5MqiXM.txt has no leaks
+Working on pastesF_p.ip.fi_PqgD.txt
+0.08
+file pastesF_p.ip.fi_PqgD.txt has no leaks
+Working on F_pastebin.com_GBPyZX7q.txt
+0.0
+file F_pastebin.com_GBPyZX7q.txt has no leaks
+Working on F_p.ip.fi_Y2tr.txt
+0.08
+file F_p.ip.fi_Y2tr.txt has no leaks
+Working on T_pastebin.com_9K4ASbau.txt
+0.22494117647058823
+file T_pastebin.com_9K4ASbau.txt has no leaks
+Working on T_pastebin.com_Db95XmXY.txt
+0.145985401459854
+file T_pastebin.com_Db95XmXY.txt has no leaks
+Working on F_pastebin.com_rKWtLQ6Q.txt
+0.0
+file F_pastebin.com_rKWtLQ6Q.txt has no leaks
+Working on F_p.ip.fi_Qzjs.txt
+0.08
+file F_p.ip.fi_Qzjs.txt has no leaks
+Working on F_pastebin.com_sN6kL2KU.txt
+0.0
+file F_pastebin.com_sN6kL2KU.txt has no leaks
+Working on F_p.ip.fi_W2u8.txt
+0.08
+file F_p.ip.fi_W2u8.txt has no leaks
+Working on F_p.ip.fi_qZxR.txt
+0.08
+file F_p.ip.fi_qZxR.txt has no leaks
+Working on T_pastebin.com_XLdGRc5k.txt
+0.44528301886792454
+file T_pastebin.com_XLdGRc5k.txt has no leaks
+Working on F_p.ip.fi_XSLB.txt
+0.08333333333333333
+file F_p.ip.fi_XSLB.txt has no leaks
+Working on T_pastebin.com_hd93RAhK.txt
+0.2751937984496124
+file T_pastebin.com_hd93RAhK.txt has no leaks
+Working on T_pastebin.com_RCAvKmGM.txt
+0.08677685950413223
+file T_pastebin.com_RCAvKmGM.txt has no leaks
+Working on F_pastebin.com_vMt3sv5E.txt
+0.2857142857142857
+file F_pastebin.com_vMt3sv5E.txt has no leaks
+Working on T_pastebin.com_LedMEDZ6.txt
+0.37058823529411766
+file T_pastebin.com_LedMEDZ6.txt has no leaks
+Working on T_pastebin.com_LLAY8RSv.txt
+0.08752449379490529
+file T_pastebin.com_LLAY8RSv.txt has no leaks
+Working on F_p.ip.fi_0V9V.txt
+0.08
+file F_p.ip.fi_0V9V.txt has no leaks
+Working on F_p.ip.fi_N4uP.txt
+0.08333333333333333
+file F_p.ip.fi_N4uP.txt has no leaks
+Working on F_p.ip.fi_1krR.txt
+0.08
+file F_p.ip.fi_1krR.txt has no leaks
+Working on T_pastebin.ai_mvnt2vjbsh.txt
+0.2222222222222222
+file T_pastebin.ai_mvnt2vjbsh.txt has no leaks
+Working on F_p.ip.fi_uVvw.txt
+0.07692307692307693
+file F_p.ip.fi_uVvw.txt has no leaks
+Working on F_p.ip.fi_ClBR.txt
+0.08695652173913043
+file F_p.ip.fi_ClBR.txt has no leaks
+Working on T_pastebin.com_QSZgnUBs.txt
+0.8265682656826568
+150 224
+file T_pastebin.com_QSZgnUBs.txt has leaks
+Working on T_p.ip.fi_Bm1h.txt
+0.08
+file T_p.ip.fi_Bm1h.txt has no leaks
+Working on T_pastebin.com_HtBSRxLH.txt
+0.0606281957633309
+file T_pastebin.com_HtBSRxLH.txt has no leaks
+Working on F_pastebin.com_FLXWNXTx.txt
+0.2
+file F_pastebin.com_FLXWNXTx.txt has no leaks
+Working on T_pastebin.com_HeLjiEcR.txt
+0.05515463917525773
+file T_pastebin.com_HeLjiEcR.txt has no leaks
+Working on T_p.ip.fi_jVil.txt
+0.08
+file T_p.ip.fi_jVil.txt has no leaks
+Working on F_p.ip.fi_wp5u.txt
+0.08
+file F_p.ip.fi_wp5u.txt has no leaks
+Working on T_pastebin.ai_z1rinqgpki.txt
+0.0109204368174727
+file T_pastebin.ai_z1rinqgpki.txt has no leaks
+Working on T_pastebin.com_B7ZRLUS8.txt
+0.2651162790697674
+file T_pastebin.com_B7ZRLUS8.txt has no leaks
+Working on F_p.ip.fi_kIVZ.txt
+0.08333333333333333
+file F_p.ip.fi_kIVZ.txt has no leaks
+Working on T_pastebin.ai_eiqw9xdhk0.txt
+0.5437756497948016
+404 795
+file T_pastebin.ai_eiqw9xdhk0.txt has leaks
+Working on T_pastebin.com_e5rAwVbE.txt
+0.14012738853503184
+file T_pastebin.com_e5rAwVbE.txt has no leaks
+Working on F_pastebin.com_s7gVExe4.txt
+0.16666666666666666
+file F_pastebin.com_s7gVExe4.txt has no leaks
+Working on F_pastebin.com_CG7U8s9N.txt
+0.0
+file F_pastebin.com_CG7U8s9N.txt has no leaks
+Working on T_pastebin.com_jn0290V0.txt
+0.11971830985915492
+file T_pastebin.com_jn0290V0.txt has no leaks
+Working on T_pastebin.com_DZe03ezC.txt
+0.08433734939759036
+file T_pastebin.com_DZe03ezC.txt has no leaks
+Working on T_pastebin.com_VJLeAV1z.txt
+0.14925373134328357
+file T_pastebin.com_VJLeAV1z.txt has no leaks
+Working on F_pastebin.com_AtjLpn26.txt
+0.2857142857142857
+file F_pastebin.com_AtjLpn26.txt has no leaks
+Working on T_pastebin.com_1MTNG358.txt
+0.0390015600624025
+file T_pastebin.com_1MTNG358.txt has no leaks
+Working on T_pastebin.com_5GSpzg38.txt
+0.6710059171597633
+619 1134
+file T_pastebin.com_5GSpzg38.txt has leaks
+Working on T_pastebin.com_YqVwPEEW.txt
+0.15625
+file T_pastebin.com_YqVwPEEW.txt has no leaks
+Working on F_p.ip.fi_7uEW.txt
+0.08
+file F_p.ip.fi_7uEW.txt has no leaks
+Working on F_p.ip.fi_5zBh.txt
+0.08
+file F_p.ip.fi_5zBh.txt has no leaks
+Working on T_pastebin.com_0fiWdXeF.txt
+0.22857142857142856
+file T_pastebin.com_0fiWdXeF.txt has no leaks
+Working on T_p.ip.fi__fIq.txt
+0.08
+file T_p.ip.fi__fIq.txt has no leaks
+Working on T_pastebin.com_mGKbFeZQ.txt
+0.0
+file T_pastebin.com_mGKbFeZQ.txt has no leaks
+Working on F_p.ip.fi_JNjS.txt
+0.08
+file F_p.ip.fi_JNjS.txt has no leaks
+Working on pastebin.ai_p0nfoza0dg.txt
+0.1607717041800643
+file pastebin.ai_p0nfoza0dg.txt has no leaks
+Working on T_pastebin.com_hxTSz6BA.txt
+0.19863013698630136
+file T_pastebin.com_hxTSz6BA.txt has no leaks
+Working on pastesF_p.ip.fi_uVvw.txt
+0.07692307692307693
+file pastesF_p.ip.fi_uVvw.txt has no leaks
+Working on F_p.ip.fi_snPy.txt
+0.08
+file F_p.ip.fi_snPy.txt has no leaks
+Working on F_p.ip.fi_6n2j.txt
+0.08
+file F_p.ip.fi_6n2j.txt has no leaks
+Working on F_pastebin.com_uwQFUQcU.txt
+0.25
+file F_pastebin.com_uwQFUQcU.txt has no leaks
+Working on T_pastebin.com_VN3DUTnb.txt
+0.7632743362831859
+228 345
+file T_pastebin.com_VN3DUTnb.txt has leaks
+Working on T_pastebin.com_tjpAVht9.txt
+0.43769968051118213
+file T_pastebin.com_tjpAVht9.txt has no leaks
+Working on F_pastebin.com_PqfwD4gQ.txt
+0.0
+file F_pastebin.com_PqfwD4gQ.txt has no leaks
+Working on T_pastebin.com_maDSNekK.txt
+0.22540983606557377
+file T_pastebin.com_maDSNekK.txt has no leaks
+Working on pastesT_pastebin.com_yT7LvVP5.txt
+0.1022167487684729
+file pastesT_pastebin.com_yT7LvVP5.txt has no leaks
+Working on T_paste.fo_sitemap.txt
+0.08551307847082495
+file T_paste.fo_sitemap.txt has no leaks
+Working on F_p.ip.fi_V_Xd.txt
+0.08
+file F_p.ip.fi_V_Xd.txt has no leaks
+Working on T_p.ip.fi_cFdR.txt
+0.07692307692307693
+file T_p.ip.fi_cFdR.txt has no leaks
+Working on F_p.ip.fi_yOT3.txt
+0.08
+file F_p.ip.fi_yOT3.txt has no leaks
+Working on F_pastebin.ai_phmm8qjman.txt
+0.5555555555555556
+6 10
+file F_pastebin.ai_phmm8qjman.txt has leaks
+Working on T_pastebin.com_GaGMmCxG.txt
+0.06412337662337662
+file T_pastebin.com_GaGMmCxG.txt has no leaks
+Working on F_p.ip.fi_zWGY.txt
+0.08
+file F_p.ip.fi_zWGY.txt has no leaks
+Working on T_pastebin.com_J34raSiN.txt
+0.04827586206896552
+file T_pastebin.com_J34raSiN.txt has no leaks
+Working on T_pastebin.ai_uvz7uztkhw.txt
+0.22522522522522523
+file T_pastebin.ai_uvz7uztkhw.txt has no leaks
+Working on T_pastebin.com_UE8kauRj.txt
+0.41706161137440756
+file T_pastebin.com_UE8kauRj.txt has no leaks
+Working on T_pastebin.com_PZZkSD0h.txt
+0.19254658385093168
+file T_pastebin.com_PZZkSD0h.txt has no leaks
+Working on T_pastebin.com_MPV22tPy.txt
+0.31746031746031744
+file T_pastebin.com_MPV22tPy.txt has no leaks
+Working on F_pastebin.ai_m7n0ugtygm.txt
+0.6434359805510534
+211 397
+file F_pastebin.ai_m7n0ugtygm.txt has leaks
+Working on F_p.ip.fi_JExn.txt
+0.07692307692307693
+file F_p.ip.fi_JExn.txt has no leaks
+Working on F_p.ip.fi_zYX3.txt
+0.08
+file F_p.ip.fi_zYX3.txt has no leaks
+Working on T_pastebin.com_mfuCx0bY.txt
+0.13746369796708616
+file T_pastebin.com_mfuCx0bY.txt has no leaks
+Working on T_pastebin.com_rkNY6rEy.txt
+0.0606281957633309
+file T_pastebin.com_rkNY6rEy.txt has no leaks
+Working on F_p.ip.fi_Uszk.txt
+0.08
+file F_p.ip.fi_Uszk.txt has no leaks
+Working on T_p.ip.fi_Ri3W.txt
+0.08
+file T_p.ip.fi_Ri3W.txt has no leaks
+Working on T_pastebin.com_09mmAB7a.txt
+0.05714285714285714
+file T_pastebin.com_09mmAB7a.txt has no leaks
+Working on F_p.ip.fi_UhrK.txt
+0.08
+file F_p.ip.fi_UhrK.txt has no leaks
+Working on F_p.ip.fi_bdvg.txt
+0.08
+file F_p.ip.fi_bdvg.txt has no leaks
+Working on T_pastebin.com_S9zqYL4e.txt
+0.24541201871176682
+file T_pastebin.com_S9zqYL4e.txt has no leaks
+Working on F_p.ip.fi_Dmtt.txt
+0.08
+file F_p.ip.fi_Dmtt.txt has no leaks
+Working on F_p.ip.fi_J6dE.txt
+0.08
+file F_p.ip.fi_J6dE.txt has no leaks
+Working on T_pastebin.com_kgYyx9t9.txt
+0.32719836400818
+file T_pastebin.com_kgYyx9t9.txt has no leaks
+Working on T_pastebin.com_1BSwSsAv.txt
+0.031746031746031744
+file T_pastebin.com_1BSwSsAv.txt has no leaks
+Working on T_pastebin.com_RH24A66X.txt
+0.02456140350877193
+file T_pastebin.com_RH24A66X.txt has no leaks
+Working on F_pastebin.com_GNp3BT2t.txt
+0.0
+file F_pastebin.com_GNp3BT2t.txt has no leaks
+Working on T_pastebin.com_b2JbbkY2.txt
+0.2658959537572254
+file T_pastebin.com_b2JbbkY2.txt has no leaks
+Working on T_pastebin.com_xFqVYjhw.txt
+0.6647727272727273
+75 117
+file T_pastebin.com_xFqVYjhw.txt has leaks
+Working on F_p.ip.fi_pyrW.txt
+0.08
+file F_p.ip.fi_pyrW.txt has no leaks
+Working on F_p.ip.fi_Jj7N.txt
+0.08333333333333333
+file F_p.ip.fi_Jj7N.txt has no leaks
+Working on F_pastebin.com_HzjGepss.txt
+0.25
+file F_pastebin.com_HzjGepss.txt has no leaks
+Working on pastesT_pastebin.com_Frgwk3xA.txt
+0.061068702290076333
+file pastesT_pastebin.com_Frgwk3xA.txt has no leaks
+Working on F_p.ip.fi_BZgc.txt
+0.08
+file F_p.ip.fi_BZgc.txt has no leaks
+Working on T_pastebin.com_Szckkvnk.txt
+0.15730337078651685
+file T_pastebin.com_Szckkvnk.txt has no leaks
+Working on pastesT_pastebin.com_LzYcmLPT.txt
+0.061068702290076333
+file pastesT_pastebin.com_LzYcmLPT.txt has no leaks
+Working on T_pastebin.com_d9PxtV9v.txt
+0.07392996108949416
+file T_pastebin.com_d9PxtV9v.txt has no leaks
+Working on T_pastebin.com_UhZPCKik.txt
+0.4541832669322709
+file T_pastebin.com_UhZPCKik.txt has no leaks
+Working on T_pastebin.com_nqqUpdMC.txt
+0.25
+file T_pastebin.com_nqqUpdMC.txt has no leaks
+Working on F_p.ip.fi_DkyL.txt
+0.08
+file F_p.ip.fi_DkyL.txt has no leaks
+Working on pastesT_pastebin.com_kgYyx9t9.txt
+0.32719836400818
+file pastesT_pastebin.com_kgYyx9t9.txt has no leaks
+Working on F_p.ip.fi_OZiU.txt
+0.08
+file F_p.ip.fi_OZiU.txt has no leaks
+Working on T_pastebin.com_BU2X4rwK.txt
+0.7114624505928854
+112 180
+file T_pastebin.com_BU2X4rwK.txt has leaks
+Working on T_pastebin.com_7g5jpy9K.txt
+0.14798206278026907
+file T_pastebin.com_7g5jpy9K.txt has no leaks
+Working on T_pastebin.com_q76TuRth.txt
+0.09925558312655088
+file T_pastebin.com_q76TuRth.txt has no leaks
+Working on T_pastebin.com_gMPuHJCs.txt
+0.31746031746031744
+file T_pastebin.com_gMPuHJCs.txt has no leaks
+Working on T_pastebin.com_vrm0LBuH.txt
+0.14859437751004015
+file T_pastebin.com_vrm0LBuH.txt has no leaks
+Working on T_p.ip.fi_Q8Ky.txt
+0.08
+file T_p.ip.fi_Q8Ky.txt has no leaks
+Working on F_p.ip.fi_JKAK.txt
+0.08
+file F_p.ip.fi_JKAK.txt has no leaks
+Working on T_pastebin.com_NA3zhEYB.txt
+0.35266821345707655
+file T_pastebin.com_NA3zhEYB.txt has no leaks
+Working on F_p.ip.fi_CZOC.txt
+0.08333333333333333
+file F_p.ip.fi_CZOC.txt has no leaks
+Working on T_pastebin.com_xiqY52Tm.txt
+0.0
+file T_pastebin.com_xiqY52Tm.txt has no leaks
+Working on T_pastebin.ai_qin5kubobn.txt
+0.0611353711790393
+file T_pastebin.ai_qin5kubobn.txt has no leaks
+Working on T_pastebin.com_YCVc4ckb.txt
+0.1016949152542373
+file T_pastebin.com_YCVc4ckb.txt has no leaks
+Working on T_pastebin.com_gWm84FJn.txt
+0.18556701030927836
+file T_pastebin.com_gWm84FJn.txt has no leaks
+Working on T_pastebin.com_x0E68PwH.txt
+0.08411214953271028
+file T_pastebin.com_x0E68PwH.txt has no leaks
+Working on T_pastebin.com_rmjq3kMp.txt
+0.09392265193370165
+file T_pastebin.com_rmjq3kMp.txt has no leaks
+Working on F_pastebin.com_YJvZqr1H.txt
+0.2857142857142857
+file F_pastebin.com_YJvZqr1H.txt has no leaks
+Working on pastesF_p.ip.fi_Y2tr.txt
+0.08
+file pastesF_p.ip.fi_Y2tr.txt has no leaks
+Working on pastesT_pastebin.com_uKcNBNbc.txt
+0.0958904109589041
+file pastesT_pastebin.com_uKcNBNbc.txt has no leaks
+Working on F_p.ip.fi_dFzk.txt
+0.08
+file F_p.ip.fi_dFzk.txt has no leaks
+Working on T_pastebin.com_XG2p9x52.txt
+0.1388888888888889
+file T_pastebin.com_XG2p9x52.txt has no leaks
+Working on F_p.ip.fi_zasF.txt
+0.08
+file F_p.ip.fi_zasF.txt has no leaks
+Working on T_pastebin.com_p2RnM3Pt.txt
+0.30130293159609123
+file T_pastebin.com_p2RnM3Pt.txt has no leaks
+Working on F_pastebin.com_0gAPZH0X.txt
+0.2857142857142857
+file F_pastebin.com_0gAPZH0X.txt has no leaks
+Working on F_p.ip.fi_BYnL.txt
+0.08
+file F_p.ip.fi_BYnL.txt has no leaks
+Working on F_p.ip.fi__SN3.txt
+0.08
+file F_p.ip.fi__SN3.txt has no leaks
+Working on F_p.ip.fi_FNuB.txt
+0.08695652173913043
+file F_p.ip.fi_FNuB.txt has no leaks
+Working on F_pastebin.com_f09DK9Lz.txt
+0.0
+file F_pastebin.com_f09DK9Lz.txt has no leaks
+Working on F_p.ip.fi_ZHZt.txt
+0.08
+file F_p.ip.fi_ZHZt.txt has no leaks
+Working on T_pastebin.com_Frgwk3xA.txt
+0.061068702290076333
+file T_pastebin.com_Frgwk3xA.txt has no leaks
+Working on F_p.ip.fi_SskI.txt
+0.08
+file F_p.ip.fi_SskI.txt has no leaks
+Working on F_p.ip.fi_bqNx.txt
+0.08
+file F_p.ip.fi_bqNx.txt has no leaks
+Working on T_pastebin.com_wrPHa42R.txt
+0.0
+file T_pastebin.com_wrPHa42R.txt has no leaks
+Working on F_p.ip.fi_YBBz.txt
+0.08
+file F_p.ip.fi_YBBz.txt has no leaks
+Working on F_pastebin.com_1UnHwun1.txt
+0.0
+file F_pastebin.com_1UnHwun1.txt has no leaks
+Working on F_p.ip.fi_DpQS.txt
+0.08
+file F_p.ip.fi_DpQS.txt has no leaks
+Working on T_pastebin.com_M2g0Gs9J.txt
+0.015273652948663556
+file T_pastebin.com_M2g0Gs9J.txt has no leaks
+Working on F_pastebin.com_VycpF6sy.txt
+0.0
+file F_pastebin.com_VycpF6sy.txt has no leaks
+Working on T_paste.fo_ZoyaAhmed.txt
+0.08855721393034825
+file T_paste.fo_ZoyaAhmed.txt has no leaks
+Working on T_pastebin.com_yT7LvVP5.txt
+0.1022167487684729
+file T_pastebin.com_yT7LvVP5.txt has no leaks
+Working on T_pastebin.com_pmS5vRDc.txt
+0.10861423220973783
+file T_pastebin.com_pmS5vRDc.txt has no leaks
+Working on T_pastebin.com_VKTZEGFB.txt
+0.08490566037735849
+file T_pastebin.com_VKTZEGFB.txt has no leaks
+Working on F_p.ip.fi_BUix.txt
+0.08333333333333333
+file F_p.ip.fi_BUix.txt has no leaks
+Working on F_p.ip.fi_myLd.txt
+0.08333333333333333
+file F_p.ip.fi_myLd.txt has no leaks
+Working on F_p.ip.fi_PqgD.txt
+0.08
+file F_p.ip.fi_PqgD.txt has no leaks
+Working on T_pastebin.com_zz6UgK6j.txt
+0.0794889992902768
+file T_pastebin.com_zz6UgK6j.txt has no leaks
+Working on F_p.ip.fi_rVGL.txt
+0.08
+file F_p.ip.fi_rVGL.txt has no leaks
+Working on F_www.bitbin.it_S7EWUVgu.txt
+0.25
+file F_www.bitbin.it_S7EWUVgu.txt has no leaks
+Working on T_p.ip.fi_ow4_.txt
+0.08
+file T_p.ip.fi_ow4_.txt has no leaks
+Working on T_pastebin.com_2L6NkCyY.txt
+0.0
+file T_pastebin.com_2L6NkCyY.txt has no leaks
+Working on T_pastebin.com_qHXk9SE8.txt
+0.04827586206896552
+file T_pastebin.com_qHXk9SE8.txt has no leaks
+Working on F_p.ip.fi_LRN0.txt
+0.08
+file F_p.ip.fi_LRN0.txt has no leaks
+Working on F_p.ip.fi_SSDn.txt
+0.08
+file F_p.ip.fi_SSDn.txt has no leaks
+Working on T_pastebin.com_SGaiDq5Z.txt
+0.18571428571428572
+file T_pastebin.com_SGaiDq5Z.txt has no leaks
+Working on T_p.ip.fi_I-LJ.txt
+0.08695652173913043
+file T_p.ip.fi_I-LJ.txt has no leaks
+Working on T_pastebin.com_FUuWgbY0.txt
+0.7174887892376681
+109 160
+file T_pastebin.com_FUuWgbY0.txt has leaks
+Working on F_p.ip.fi_w0ZU.txt
+0.08
+file F_p.ip.fi_w0ZU.txt has no leaks
+Working on T_pastebin.com_hjd8dw6p.txt
+0.1774193548387097
+file T_pastebin.com_hjd8dw6p.txt has no leaks
+Working on T_pastebin.com_P5xzA8tp.txt
+0.0
+file T_pastebin.com_P5xzA8tp.txt has no leaks
+Working on F_p.ip.fi_RJhc.txt
+0.08
+file F_p.ip.fi_RJhc.txt has no leaks
+Working on T_pastebin.ai_177qir7qbq.txt
+0.09375
+file T_pastebin.ai_177qir7qbq.txt has no leaks
+Working on T_pastebin.com_R5cjiB5R.txt
+0.1100244498777506
+file T_pastebin.com_R5cjiB5R.txt has no leaks
+Working on T_pastebin.com_UZ4Su80c.txt
+0.125
+file T_pastebin.com_UZ4Su80c.txt has no leaks
+Working on T_pastebin.com_ACk11YRY.txt
+0.3924731182795699
+file T_pastebin.com_ACk11YRY.txt has no leaks
+Working on T_pastebin.com_is6a4KMJ.txt
+0.17632241813602015
+file T_pastebin.com_is6a4KMJ.txt has no leaks
+Working on F_www.bitbin.it_m3Xddqm6.txt
+0.6842105263157895
+34 39
+file F_www.bitbin.it_m3Xddqm6.txt has leaks
+Working on T_pastebin.ai_dwtpsfb4hf.txt
+0.4166666666666667
+file T_pastebin.ai_dwtpsfb4hf.txt has no leaks
+Working on F_p.ip.fi_ZSRC.txt
+0.08695652173913043
+file F_p.ip.fi_ZSRC.txt has no leaks
+Working on T_pastebin.com_tTMMFQnw.txt
+0.0606281957633309
+file T_pastebin.com_tTMMFQnw.txt has no leaks
+Working on F_pastebin.com_whpmE1Uy.txt
+0.0
+file F_pastebin.com_whpmE1Uy.txt has no leaks
+Working on F_pastebin.com_a7bCD10t.txt
+0.25
+file F_pastebin.com_a7bCD10t.txt has no leaks
+Working on T_pastebin.com_JRhxFTMn.txt
+0.0
+file T_pastebin.com_JRhxFTMn.txt has no leaks
+Working on pastesF_p.ip.fi_szsm.txt
+0.08
+file pastesF_p.ip.fi_szsm.txt has no leaks
+Working on T_pastebin.com_nqiLNC9g.txt
+0.07390300230946882
+file T_pastebin.com_nqiLNC9g.txt has no leaks
+Working on F_p.ip.fi_I_BQ.txt
+0.08
+file F_p.ip.fi_I_BQ.txt has no leaks
+Working on F_pastebin.com_BCvMT5ai.txt
+0.25
+file F_pastebin.com_BCvMT5ai.txt has no leaks
+Working on T_pastebin.com_Rnnx639M.txt
+0.0
+file T_pastebin.com_Rnnx639M.txt has no leaks
+Working on F_p.ip.fi_ymur.txt
+0.08333333333333333
+file F_p.ip.fi_ymur.txt has no leaks
+Working on F_pastebin.com_J6b03vsD.txt
+0.125
+file F_pastebin.com_J6b03vsD.txt has no leaks
+Working on T_pastebin.com_ayWS6fZk.txt
+0.27896995708154504
+file T_pastebin.com_ayWS6fZk.txt has no leaks
+Working on F_pastebin.com_xCKhxmLs.txt
+0.0
+file F_pastebin.com_xCKhxmLs.txt has no leaks
+Working on pastesT_pastebin.com_9K4ASbau.txt
+0.22494117647058823
+file pastesT_pastebin.com_9K4ASbau.txt has no leaks
+Working on F_p.ip.fi_jxzq.txt
+0.08
+file F_p.ip.fi_jxzq.txt has no leaks
+Working on F_p.ip.fi_WZLa.txt
+0.08333333333333333
+file F_p.ip.fi_WZLa.txt has no leaks
+Working on T_pastebin.com_D3W3VZgt.txt
+0.10516252390057361
+file T_pastebin.com_D3W3VZgt.txt has no leaks
+Working on F_pastebin.com_VU963qyj.txt
+0.2857142857142857
+file F_pastebin.com_VU963qyj.txt has no leaks
+Working on F_p.ip.fi_XL-X.txt
+0.08333333333333333
+file F_p.ip.fi_XL-X.txt has no leaks
+Working on T_p.ip.fi_hvNr.txt
+0.08
+file T_p.ip.fi_hvNr.txt has no leaks
+Working on T_pastebin.com_mfUwzMcY.txt
+0.1743119266055046
+file T_pastebin.com_mfUwzMcY.txt has no leaks
+Working on T_pastebin.com_B8gzs9wm.txt
+0.25
+file T_pastebin.com_B8gzs9wm.txt has no leaks
+Working on F_p.ip.fi_D_fD.txt
+0.08
+file F_p.ip.fi_D_fD.txt has no leaks
+Working on T_pastebin.com_1cJYRmS4.txt
+0.052132701421800945
+file T_pastebin.com_1cJYRmS4.txt has no leaks
+Working on F_pastebin.com_bpjk20FY.txt
+0.0
+file F_pastebin.com_bpjk20FY.txt has no leaks
+Working on F_pastebin.com_DWPxxTkd.txt
+0.125
+file F_pastebin.com_DWPxxTkd.txt has no leaks
+Working on F_p.ip.fi_-L0i.txt
+0.08333333333333333
+file F_p.ip.fi_-L0i.txt has no leaks
+Working on pastesT_pastebin.com_gMPuHJCs.txt
+0.31746031746031744
+file pastesT_pastebin.com_gMPuHJCs.txt has no leaks
+Working on T_pastebin.com_cnVE7aX3.txt
+0.14825581395348839
+file T_pastebin.com_cnVE7aX3.txt has no leaks
+Working on F_p.ip.fi_ZIll.txt
+0.08
+file F_p.ip.fi_ZIll.txt has no leaks
+Working on pastesF_p.ip.fi_AChX.txt
+0.08
+file pastesF_p.ip.fi_AChX.txt has no leaks
+Working on F_p.ip.fi_fGoW.txt
+0.08
+file F_p.ip.fi_fGoW.txt has no leaks
+Working on F_p.ip.fi_Fu7A.txt
+0.08
+file F_p.ip.fi_Fu7A.txt has no leaks
+Working on T_pastebin.com_frfuzbG1.txt
+0.14057507987220447
+file T_pastebin.com_frfuzbG1.txt has no leaks
+Working on T_p.ip.fi_rHPn.txt
+0.08
+file T_p.ip.fi_rHPn.txt has no leaks
+Working on T_pastebin.com_kUS8p3Zz.txt
+0.2552607502287283
+file T_pastebin.com_kUS8p3Zz.txt has no leaks
+Working on F_p.ip.fi_3_Hz.txt
+0.08
+file F_p.ip.fi_3_Hz.txt has no leaks
+Working on F_p.ip.fi_p6bY.txt
+0.08
+file F_p.ip.fi_p6bY.txt has no leaks
+Working on T_pastebin.com_MqFfhNX6.txt
+0.25252525252525254
+file T_pastebin.com_MqFfhNX6.txt has no leaks
+Working on F_pastebin.com_WTcziekU.txt
+0.0
+file F_pastebin.com_WTcziekU.txt has no leaks
+Working on F_paste.fo_1eeffbb8314a.txt
+0.18181818181818182
+file F_paste.fo_1eeffbb8314a.txt has no leaks
+Working on T_pastebin.com_zCfnTUjb.txt
+0.32390745501285345
+file T_pastebin.com_zCfnTUjb.txt has no leaks
+Working on F_p.ip.fi_szsm.txt
+0.08
+file F_p.ip.fi_szsm.txt has no leaks
+Working on T_pastebin.com_DfxqjYQc.txt
+0.40173410404624277
+file T_pastebin.com_DfxqjYQc.txt has no leaks
+Working on pastesT_pastebin.com_p2RnM3Pt.txt
+0.30130293159609123
+file pastesT_pastebin.com_p2RnM3Pt.txt has no leaks
+Working on T_pastebin.com_g7SVD6ew.txt
+0.09933774834437085
+file T_pastebin.com_g7SVD6ew.txt has no leaks
+Working on T_paste.fo_g635d50879ed09.txt
+0.25
+file T_paste.fo_g635d50879ed09.txt has no leaks
+Working on F_pastebin.com_aZeU0qJB.txt
+0.0
+file F_pastebin.com_aZeU0qJB.txt has no leaks
+Working on F_p.ip.fi_AChX.txt
+0.08
+file F_p.ip.fi_AChX.txt has no leaks
+Working on F_pastebin.com_fXmcTyrD.txt
+0.0
+file F_pastebin.com_fXmcTyrD.txt has no leaks
+Working on T_pastebin.com_3Gia4qh9.txt
+0.2731707317073171
+file T_pastebin.com_3Gia4qh9.txt has no leaks
+Working on T_pastebin.com_ksTFuXi9.txt
+0.18152350081037277
+file T_pastebin.com_ksTFuXi9.txt has no leaks
+Working on F_pastebin.com_xeEb7Svn.txt
+0.14285714285714285
+file F_pastebin.com_xeEb7Svn.txt has no leaks
+Working on T_pastebin.com_Lc2Wewre.txt
+0.042993630573248405
+file T_pastebin.com_Lc2Wewre.txt has no leaks
+Working on T_pastebin.com_ZG7Ltkw3.txt
+0.26392961876832843
+file T_pastebin.com_ZG7Ltkw3.txt has no leaks
+Working on T_pastebin.com_uUD3fA0v.txt
+0.24948453608247423
+file T_pastebin.com_uUD3fA0v.txt has no leaks
+Working on T_p.ip.fi_xvrO.txt
+0.08
+file T_p.ip.fi_xvrO.txt has no leaks
+Working on T_pastebin.com_4YyFrmaU.txt
+0.25
+file T_pastebin.com_4YyFrmaU.txt has no leaks
+Working on F_p.ip.fi_rGRA.txt
+0.07692307692307693
+file F_p.ip.fi_rGRA.txt has no leaks
+Working on F_p.ip.fi_FDqt.txt
+0.08
+file F_p.ip.fi_FDqt.txt has no leaks
+Working on F_p.ip.fi_FeCl.txt
+0.08
+file F_p.ip.fi_FeCl.txt has no leaks
+Working on T_pastebin.com_9WzMdySa.txt
+0.10362694300518134
+file T_pastebin.com_9WzMdySa.txt has no leaks
+Working on T_pastebin.com_iu8Lfpgt.txt
+0.3173913043478261
+file T_pastebin.com_iu8Lfpgt.txt has no leaks
+Working on T_pastebin.com_XemZffGb.txt
+0.06468023255813954
+file T_pastebin.com_XemZffGb.txt has no leaks
+Working on T_pastebin.com_drXaXX69.txt
+0.06472727272727273
+file T_pastebin.com_drXaXX69.txt has no leaks
+Working on F_pastebin.com_YZtxuZsX.txt
+0.0
+file F_pastebin.com_YZtxuZsX.txt has no leaks
+Working on F_pastebin.com_nQYMtBHS.txt
+0.0
+file F_pastebin.com_nQYMtBHS.txt has no leaks
+Working on T_pastebin.com_tG2Cjdhw.txt
+0.17586206896551723
+file T_pastebin.com_tG2Cjdhw.txt has no leaks
+Working on T_pastebin.com_4znqpd49.txt
+0.15126050420168066
+file T_pastebin.com_4znqpd49.txt has no leaks
+Working on T_pastebin.com_BrvzJrSD.txt
+0.39762611275964393
+file T_pastebin.com_BrvzJrSD.txt has no leaks
+Working on T_www.bitbin.it_lSRv16Fa.txt
+0.8064516129032258
+36 50
+file T_www.bitbin.it_lSRv16Fa.txt has leaks
+Working on pastesT_pastebin.com_LLAY8RSv.txt
+0.08752449379490529
+file pastesT_pastebin.com_LLAY8RSv.txt has no leaks
+Working on pastesF_p.ip.fi_GnCc.txt
+0.08
+file pastesF_p.ip.fi_GnCc.txt has no leaks
+Working on F_p.ip.fi_ipLF.txt
+0.08
+file F_p.ip.fi_ipLF.txt has no leaks
+Working on T_pastebin.com_QshtTxnp.txt
+0.19111111111111112
+file T_pastebin.com_QshtTxnp.txt has no leaks
+Working on F_p.ip.fi_dS0E.txt
+0.08
+file F_p.ip.fi_dS0E.txt has no leaks
+Working on F_p.ip.fi_FqZv.txt
+0.08
+file F_p.ip.fi_FqZv.txt has no leaks
+Working on T_pastebin.com_tGZwV31r.txt
+0.18716577540106952
+file T_pastebin.com_tGZwV31r.txt has no leaks
+Working on pastesF_p.ip.fi_I_BQ.txt
+0.08
+file pastesF_p.ip.fi_I_BQ.txt has no leaks
+Working on T_www.bitbin.it_l7pPA9R9.txt
+0.25
+file T_www.bitbin.it_l7pPA9R9.txt has no leaks
+Working on F_pastebin.com_mJQdusyG.txt
+0.0
+file F_pastebin.com_mJQdusyG.txt has no leaks
+Working on T_p.ip.fi_H0Td.txt
+0.08
+file T_p.ip.fi_H0Td.txt has no leaks
+Working on T_pastebin.com_06NJSGQT.txt
+0.08704061895551257
+file T_pastebin.com_06NJSGQT.txt has no leaks
+Working on T_pastebin.com_pastebin.com.txt
+0.16
+file T_pastebin.com_pastebin.com.txt has no leaks
+Working on F_pastebin.com_wwAF46VW.txt
+0.0
+file F_pastebin.com_wwAF46VW.txt has no leaks
+Working on pastesF_p.ip.fi_p6bY.txt
+0.08
+file pastesF_p.ip.fi_p6bY.txt has no leaks
+Working on F_p.ip.fi_GnCc.txt
+0.08
+file F_p.ip.fi_GnCc.txt has no leaks
+Working on F_p.ip.fi_BsqK.txt
+0.08
+file F_p.ip.fi_BsqK.txt has no leaks
+Working on T_p.ip.fi_4yNK.txt
+0.08
+file T_p.ip.fi_4yNK.txt has no leaks
+Working on F_pastebin.com_uTeMnG4Q.txt
+0.25
+file F_pastebin.com_uTeMnG4Q.txt has no leaks
+Working on T_p.ip.fi_gn7R.txt
+0.08
+file T_p.ip.fi_gn7R.txt has no leaks
+Working on T_pastebin.com_2dBBnQH6.txt
+0.19861830742659758
+file T_pastebin.com_2dBBnQH6.txt has no leaks
+Working on T_pastebin.com_ed9G2irp.txt
+0.26394052044609667
+file T_pastebin.com_ed9G2irp.txt has no leaks
+Working on pastesT_pastebin.com_VJLeAV1z.txt
+0.14925373134328357
+file pastesT_pastebin.com_VJLeAV1z.txt has no leaks
+Working on T_pastebin.com_dqUH6gwD.txt
+0.24022346368715083
+file T_pastebin.com_dqUH6gwD.txt has no leaks
+Working on F_p.ip.fi_qRHV.txt
+0.08
+file F_p.ip.fi_qRHV.txt has no leaks
+Working on F_p.ip.fi_w4hH.txt
+0.08
+file F_p.ip.fi_w4hH.txt has no leaks
+Working on T_pastebin.com_Dx85Kw9e.txt
+0.16981132075471697
+file T_pastebin.com_Dx85Kw9e.txt has no leaks
+Working on F_p.ip.fi_rbd_.txt
+0.08
+file F_p.ip.fi_rbd_.txt has no leaks
+Working on F_p.ip.fi_Gdle.txt
+0.08
+file F_p.ip.fi_Gdle.txt has no leaks
+Working on T_pastebin.com_GbQ6Z3BA.txt
+0.14285714285714285
+file T_pastebin.com_GbQ6Z3BA.txt has no leaks
+Working on F_p.ip.fi_aXxJ.txt
+0.08
+file F_p.ip.fi_aXxJ.txt has no leaks
+Working on T_pastebin.com_uKcNBNbc.txt
+0.0958904109589041
+file T_pastebin.com_uKcNBNbc.txt has no leaks
+Working on T_pastebin.ai_gnncmi0mxe.txt
+0.09774436090225563
+file T_pastebin.ai_gnncmi0mxe.txt has no leaks
+Working on T_pastebin.com_CpBiNqSr.txt
+0.1734820322180917
+file T_pastebin.com_CpBiNqSr.txt has no leaks

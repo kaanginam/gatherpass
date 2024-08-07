@@ -1,11 +1,171 @@
 # gatherpass
-//{
-        //    "site": "pastebin.com",
-        //    "dl": "raw/"
-        //},
+This tool is meant to periodically scan paste pages and forums for possible leaks. It allows full customization of both, as well as the option to setup conditions for the detection
+## Features
+- Notification via [ntfy](https://ntfy.sh/) (**NOTE**: Using the public ntfy server means your notifications are available in cleartext to the public ntfy server. Only use the public server if you are fine with this, otherwise use a self hosted version)
+- Scanning pastes or hacker forums for leaks using custom rules and password lists
+- Provides tested configurations for quick start
+- Uses Google Indexing to search most recent pastes
+- Saves result in sqlite3
+## Requirements
+1.  `python3.11`
+2.  `aspell-*`
+3.  `chromium-chromedriver` and the option to open a X window
+4.  A list of passwords (sha1 hashed). You can get a list online, from e.g. HIBP:
+    1.  Use the [PwnedPasswordsDownloader](https://github.com/HaveIBeenPwned/PwnedPasswordsDownloader) to download HIBP passwords (requires dotnet)
+    2.  The password hashes are paired with their frequency in the database. Sort by frequency, then take any amount of hashes from there.
+    3.  (Optional) Add custom hashes to password list `echo -n "hello" | sha1sum | awk '{print $1}'c >> password_list.txt` ([source](https://stackoverflow.com/questions/15626073/sha1-password-hash-linux))
+
+## Installation steps
+Ubuntu:
+```sh
+sudo apt install python3 python3-virtualenv sqlite3 aspell-* chromium-chromedriver
+virtualenv .env
+source .env/bin/activate
+pip install -r requirements.txt
+```
+
+## Setup
+
+Before running either of the scripts, it is important to configure the scan by creating a file `conf.json`. This file configures where to scan, and other informations. Here is an example that covers most of the information needed:
+```json
+{
+    "page_list": [
+        
+        {
+            "site": "ideone.com",
+            "dl": "plain/"
+        },
+        {
+            "site": "pastebin.ai",
+            "dl": "raw/"
+        },
+        {
+            "site": "pastebin.com",
+            "dl": "raw/"
+        },
+        {
+            "site": "p.ip.fi",
+            "dl": ""
+        },
+        {   
+            "site": "paste.fo",
+            "dl": "raw/"
+        },
+        {
+            "site": "www.bitbin.it",
+            "dl": "/raw",
+            "reverse": true
+        }
+    ],
+    "search_engine": [
+        "google.com",
+        "bing.com"
+    ],
+    "providers": [
+        "@gmail.com",
+        "@yahoo.com",
+        "@outlook.com",
+        "@gmx.de",
+        "@web.de"
+    ],
+    "cookies": {
+        "CONSENT": "PENDING+987",
+        "SOCS": "CAESHAgBEhJnd3NfMjAyMzA4MTAtMF9SQzIaAmRlIAEaBgiAo_CmBg"
+    },
+    "separators": [
+        ":",
+        "|",
+        ";"
+    ],
+    "passlist": "password_list_hashes.txt",
+    "urls_to_gather": [
+        "https://t.me"
+    ],
+    "forums": [
+        {
+            "name": "www.nulled.to",
+            "login_uri": "",
+            "dump_list": "/forum/184-dumps-databases/?sort_key=start_date",
+            "topics": "/topic",
+            "tid": "forum_table"
+        },
+        {
+            "name": "cracked.io",
+            "login_uri": "/member.php?action=login",
+            "dump_list": "/Forum-Accounts?sortby=started&order=desc&datecut=9999&prefix=0",
+            "tid": "topiclist",
+            "thanks": "//a[@class='postbit_thanks add_tyl_button']",
+            "quote": "postbit_quote",
+            "posts": "posts",
+            "post_body": "post-set",
+            "post_content": "//div[2]/div[4]/div/div/div[5]/table/tbody/tr/td/div/div/div[1]/div[2]/div[3]/div[2]",
+            "post_bottom": "//div[2]/div[4]/div/div/div[5]/table/tbody/tr/td/div/div/div[1]/div[2]/div[4]/div/div/div[2]",
+            "reply_body_iframe": "//div[@id='content']/div/div/form/table/tbody/tr[5]/td/div/div/div/iframe",
+            "reply_body": "//body/br",
+            "reply_post": "//body/div[2]/div[4]/div/div/form/div/input[1]",
+            "unlike": "UNLIKE",
+            "hidden": "Hidden Content\nYou must reply to this thread to view this content or upgrade your account.\n\nNote: Upgrade your account to see all hidden content on every post without replying and prevent getting banned."
+        }
+    ],
+    "ratio": 0.3,
+    "user_data": "./chrome-data",
+    "chrome_binary": "",
+    "ntfy_topic": "https://ntfy.sh/mVwSOeEKHBKoR57y",
+    "thread_ignore_pw": ["#1"],
+    "pastes": "pastes/", 
+    "threads": "threads/",
+    "ignore_list": ["--", "#include", "public", "import", "class", "NULL", "True", "true"]
+}
+```
+
+After setting everything up, you need to manually log in to the hacker forum you want to scan. The session data will be saved, meaning you will not have to log in again. 
+
+### Variable explanation
+Some of these variables you will have to define yourself. If you want to scan a new forum not in this example list, you can determine the variables by going into the HTML code of the forum, right clicking on the appropiate element then select `Copy full XPath`. Make sure to change `/html/body/div` to `//div`.
+
+| Variable | Explanation |
+| -------- | ------- |
+| page_list | List of paste pages, each using the _site_ and _dl_ parameter |
+| cookies | This variable attempts to bypass Google Captchas that usually stop automated requests that use the Google search engine |
+| seperators | A list of characters you believe seperate passwords |
+| passlist | The filename/path to the file that contains the password list |
+| urls_to_gather | A list of URLs that you might want to gather from pastes or forums |
+| forums | List of forums to scan |
+| ratio | The password to word ratio |
+| user_data | The folder to save the chromium session data to |
+| chrome_binary | The directory of the chromedriver exe |
+| ntfy_topic | The URl of the ntfy topic to post to (Optional) |
+| pastes | Folder to save the pastes to (needs to be created in advance) |
+| threads | Folder to save threads to (needs to be created in advance) |
+| ignore_list | List of passwords to ignore |
 
 
+For pastes:
 
+| Variable | Explanation |
+| -------- | ------- |
+| site | URL of paste page, without `https://` |
+| dl | the url extension used for getting words and the text of the paste. It is recommended to use any URL extension that results in raw text. PLeasre make sure to use a slash at the end |
+| reverse | Some paste pages use the dl extension _after_ the id of the paste, then set this variable |
+
+For forums:
+
+| Variable | Explanation |
+| -------- | ------- |
+| name | Name of forum, the URL. Withouth `https://` |
+| dump_list | Each hacker forum usually has a page with the threads in a list, enter the sub-URL here |
+| tid | HTML id of the element that has the list |
+| thanks | The path to the button for liking. This button is used to not seem suspicious |
+| quote | The ID of the button used for responding |
+| posts | ID of the table that has the posts |
+| post_body | Body of a post |
+| post_content | Content of the post |
+| post_bottom | Bottom row of post that usually has the buttons |
+| reply_body_iframe | Threads use an iframe for their reply body. This path delivers the path to iframe to switch to |
+| reply_body | Body of where to write to |
+| reply_post | Button to post the reply |
+| unlike | The text on the button if a post has been like before |
+| hidden | text that indicates that the content of the post is hidden |
 ## TODO
 - password heuristic: how big password list? determine how accurate it is in every leak I have, test until each leak is flagged
 - forum gathering: replies + subsequent leak gathering
