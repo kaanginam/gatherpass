@@ -137,15 +137,20 @@ fns = os.listdir(subdir)
 #for fn in fns:
 #count_from_file(sys.argv[1])
 config = PassConfig("./conf.json")
-parser = LeakParser("password_list_hashes_3.txt", config.get_providers(), config)
+
+i = 0
 for fn in fns:
+    parser = LeakParser("password_list_hashes_3.txt", config.get_providers(), config)
+    if fn == "6SK1B5fz8zBun5gSG1BxCY.txt" or fn == "paste2.org.43":
+        continue
+    if i == 100:
+        break
+    i += 1
     with open(f'{subdir}{fn}', 'r', encoding='ISO-8859-1') as f:
         text = f.read()
     print(f'Working on {fn}')
+    if 'from pastebin.ai' in text or 'from pastebin.com' in text or 'from www.bitbin.it' in text or 'from p.ip.fi' in text:
+        text = "\n".join(text.splitlines()[1:])
     rett = parser.has_credentials(text)
-    if not rett:
-        print(f'file {fn} has no leaks')
-    else:
-        print(f'file {fn} has leaks')
     #count_from_file(sys.argv[1])
 #print(f'Avg: Words {word_lens} Pws {pws} English {cnt2}')

@@ -1,6 +1,9 @@
 import requests
 import logging
 import time
+"""
+Small snippet to deal with notifications for ntfy
+"""
 def notify(tpc, text):
     try:
         requests.post(tpc, data=text.encode(encoding='utf-8'))

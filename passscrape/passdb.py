@@ -1,6 +1,9 @@
 import sqlite3
 import logging
 import os
+"""
+Database manager that adds paste, checks if one exists and more.
+"""
 class PassDB:
     def __init__(self, dbName, prefix=''):
         try:
@@ -79,7 +82,6 @@ class PassDB:
             return True
     def add_topic(self, header, source):
         cursor = self.connection.cursor()
-        # <a class="topic_title highlight_unread" href="https://www.nulled.to/topic/1620375-81k-leak-website-dump-top-hashed/" 
         cursor.execute('create table if not exists topics (header TEXT, source TEXT)')
         cursor.execute('insert into topics (header, source) values (?, ?)', (header, source))
     def check_topics(self, header, source):
@@ -89,9 +91,5 @@ class PassDB:
             return False
         else:
             return True
-    # TODO:
-    # getter for users and passwords
-    # getter by source
-    # implement a check to see if paste exists, then excluding the pastes from google queries?
             
         

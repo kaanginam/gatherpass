@@ -1,8 +1,11 @@
 import json
+"""
+Helper class to deal with config as well as deal with
+undefined values
+"""
 class PassConfig:
     def __init__(self, config_path) -> None:
         self.config = {}
-        # TODO: use standard values if a variable/key undefined
         with open(config_path, "r") as f:
             self.config = json.load(f)
     def get_paste_pages(self) -> list:

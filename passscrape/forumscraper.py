@@ -12,6 +12,9 @@ import time
 import logging
 import sys
 import os
+"""
+Deals with scanning forums using customised settings
+"""
 class ForumScraper():
     def __init__(self, urls, parser, config, prefix='', basedir=''):
         self.urls_to_gather = urls

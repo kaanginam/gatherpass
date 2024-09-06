@@ -3,6 +3,9 @@ from bs4 import BeautifulSoup
 import requests
 from passscrape.passnotifier import notify
 import logging
+"""
+Deals with scraping using Google Indexing and then deals with scraped content
+"""
 class GoogleScraper():
     def __init__(self, cookies, today, config, basedir=''):
         self.cookies = cookies
@@ -31,28 +34,33 @@ class GoogleScraper():
                     pasteid = pasteid.split(r'%3F')[0]
                 filename = f"{p['site']}_{pasteid}.txt"
                 results.append(filename)
+                # Some paste pages put the URL extension defining the "raw" text behind the id of the paste
                 full_url = f"https://{p['site']}/{str(pasteid)}{p['dl']}" if 'reverse' in p and p['reverse'] else f"https://{p['site']}/{p['dl']}{str(pasteid)}"
                 res = requests.get(full_url)
                 text = res.text
+                # Do not check pastes already in database
                 if self.db.paste_exists(p['site'], pasteid):
                     continue
                 logging.info(f'Found a new paste')
                 self.db.add_paste(p['site'], pasteid, text)
-                output = parser.has_credentials(text)
+                output, words = parser.has_credentials(text)
                 addition = ''
                 if output:
-                    msg = f"A commonly used password was found on {p['site']}: {pasteurl}. The password was {output}"
+                    msg = f"A commonly used password was found on {p['site']}: {pasteurl}. The password was {[x for w in self.words if w["is_pw"]]}"
                     logging.info(msg)
                     if tpc:
                         notify(tpc, msg)
                     self.db.paste_is_leak(p['site'], pasteid, output)
                     addition = 'T_'
+                    # Only grab links from leaks as they can be interesting and possibly related to the leak
                     self.grab_links(tpc, text, p)
                 # False password
                 else:
                     addition = 'F_'
                 filename = self.basedir + addition + filename
                 parser.save_results(filename, text, p['site'])
+    # Gets all links from a text based on which links
+    # are supposed to be gathered
     def grab_links(self, tpc, text, p):
         for url in self.config.get_urls_to_gather():
             logging.info(f'Trying to get {url} from paste')
