@@ -8,7 +8,7 @@ class PassDB:
     def __init__(self, dbName, prefix=''):
         try:
             logging.info("Attempting connection to database")
-            self.connection = sqlite3.connect(dbName)
+            self.connection = sqlite3.connect(prefix + dbName)
             self.fail = False
         except Exception as e:
             logging.exception("Exception when trying to connect to database")

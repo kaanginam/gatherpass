@@ -14,9 +14,8 @@ This class deals with the raw text of a potential leak, trying to check if there
 inside of it
 """
 class LeakParser:
-    def __init__(self, passlist, providers, config):
+    def __init__(self, passlist, config):
         self.passlist = self.get_lines(passlist)
-        self.providers = providers
         self.config = config
         self.words = []
     def check_patterns(self, string):
@@ -57,7 +56,7 @@ class LeakParser:
             result = 'en_US'
         return result
     """
-    Check if word is in words
+    Check if word is in words, increases count if it is
     """
     def word_in_words(self, word):
         found = False
@@ -71,6 +70,10 @@ class LeakParser:
                 "count": 0,
                 "is_pw": False
             })
+    """
+    Gets all the words in text and saves them in self.words.
+    Skips newlines, empty words, URL
+    """
     def get_words(self, text):
         seperators = self.config.get_seperators()
         lines = text.split("\n")
@@ -92,46 +95,48 @@ class LeakParser:
                             if s != '' and s != '\n':
                                 self.word_in_words(s)          
                 self.word_in_words(word)
+    """
+    Gets the language of text, counts the amount of words from dict and passwords, then decides if it is a leak 
+    """
     def has_credentials(self, text):
         lang = self.get_language(text)
         d = enchant.Dict(lang)
-        #cnt = 0
-        #n = self.guess_n(text)
-        # TODO: Check for combos
-        # Common table formats etc
-        # Otherwise: divide words
         pw_count = 0
-        # TODO: add password regex?
         self.get_words(text)
         dict_count = 0
         ignore_list = self.config.get_ignore_list()
         for word in self.words:
+            # Checks if the word is in the created dictionary and also if it is not a digit
             if d.check(word["txt"]) and not word["txt"].isdigit():
                 dict_count += 1
+            # Create sha1 hash of word because the password list is also hashes
             hexxed = hashlib.sha1(word["txt"].encode()).hexdigest()
-            # TODO: explain this line
+            # Skip words that are only 1 character, make sure the hexxes match, ignore false positives
             if (hexxed.upper() in self.passlist or hexxed in self.passlist) and word["txt"] not in ignore_list and len(word["txt"]) != 1:
                 pw_count += 1
                 word["is_pw"] = True
         logging.info(f'pw_count: {pw_count}, dict_count: {dict_count}, ratio: {pw_count/dict_count if dict_count != 0 else 0}')
-        # print(dict_count/len(words))
-        # breakpoint()
+        # No words in text
         if len(self.words) == 0:
-            print("NO WORDS")
             return False, self.words
-        if (dict_count > pw_count  and dict_count/len(self.words) > 0.2 and ) or pw_count == 0: #and  dict_count/pw_count > self.config.get_ratio():
+        if (dict_count > pw_count  and dict_count/len(self.words) > 0.2 and pw_count/dict_count < 0.3) or pw_count == 0: 
             print(f'Has no leaks, PWs: {pw_count}, Ws in dict: {dict_count}, ratio dict/numwords: {dict_count/len(self.words)}, num words: {len(self.words)}, top3: {sorted(self.words, key=lambda d: d["count"], reverse=True)[0:3]}')
-            # print(pw_count, dict_count)
             return False, self.words
         else:
             print(f'Has leaks, PWs: {pw_count}, Ws in dict: {dict_count}, ratio dict/numwords: {dict_count/len(self.words)}, num words: {len(self.words)}, top3: {sorted(self.words, key=lambda d: d["count"], reverse=True)[0:3]}')
             return True, self.words
+    """
+    Saves results of scanned paste to file for debug purposes
+    """
     def save_results(self, filename, content, source):
         from datetime import datetime
         ct = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
         with open(filename, 'w', encoding='utf-8') as f:
             f.write(f'{ct} from {source}\n')
             f.write(content)
+    """
+    Get all the lines from text
+    """
     def get_lines(self, filename):
         with open(filename, 'r') as f:
             return f.read().splitlines()

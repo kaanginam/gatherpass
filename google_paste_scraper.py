@@ -15,7 +15,7 @@ def main():
     # Initialize scraper
     scraper = GoogleScraper(cookies, today, config, 'pastes/')
     # Initialize parser
-    parser = LeakParser(config.get_passlist(), config.get_providers(), config)
+    parser = LeakParser(config.get_passlist(), config)
     # Scan each paste page seperately for pastes
     for p in config.get_paste_pages():
         scraper.scrape(parser, p)

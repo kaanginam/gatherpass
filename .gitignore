@@ -34,7 +34,7 @@ selenium_test.py
 .venv
 firefox-data
 user-data
-fpastes.txt
+fpastes*.txt
 pastes_counting2.txt
 # Byte-compiled / optimized / DLL files
 __pycache__/

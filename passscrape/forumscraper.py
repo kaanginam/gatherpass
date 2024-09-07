@@ -23,13 +23,6 @@ class ForumScraper():
         self.config = config
         self.basedir = basedir
     def scrape(self, forum):
-        root = logging.getLogger()
-        root.setLevel(logging.INFO)
-        handler = logging.StreamHandler(sys.stdout)
-        handler.setLevel(logging.INFO)
-        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        handler.setFormatter(formatter)
-        root.addHandler(handler)
         source = forum['name']
         base_url = f"https://{source}"
         full_url = f"{base_url}{forum['dump_list']}"
@@ -104,6 +97,9 @@ class ForumScraper():
                 continue
     def response(self):
         return "thanks! :D"
+    """
+    Wait for selenium element to exist
+    """
     def wait_for_element(self, driver, by, path):
         try:
             element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((by, path)))

@@ -6,7 +6,7 @@ config = PassConfig('./conf.json')
 Main function to scrape forum
 """
 def main():
-    parser = LeakParser(config.get_passlist(), config.get_providers(), config)
+    parser = LeakParser(config.get_passlist(), config)
     scr = ForumScraper(config.get_urls_to_gather(), parser, config, '', 'threads/')
     # For each forum, scrape using created parser
     for forum in config.get_forums():
