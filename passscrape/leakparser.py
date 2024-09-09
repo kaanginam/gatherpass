@@ -93,7 +93,8 @@ class LeakParser:
                     if sep in word:
                         for s in word.split(sep): 
                             if s != '' and s != '\n':
-                                self.word_in_words(s)          
+                                self.word_in_words(s)
+                                wordsInLine.append(s)        
                 self.word_in_words(word)
     """
     Gets the language of text, counts the amount of words from dict and passwords, then decides if it is a leak 

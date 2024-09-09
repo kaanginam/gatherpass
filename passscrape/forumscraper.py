@@ -1,5 +1,6 @@
 # from seleniumbase import BaseCase
 from selenium import webdriver
+import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.service import Service
@@ -11,7 +12,10 @@ from passscrape.passnotifier import notify
 import time
 import logging
 import sys
+import random
 import os
+from fake_useragent import UserAgent
+from seleniumbase import Driver
 """
 Deals with scanning forums using customised settings
 """
@@ -23,26 +27,48 @@ class ForumScraper():
         self.config = config
         self.basedir = basedir
     def scrape(self, forum):
+        ua = UserAgent()
+        user_agent = ua.random
+        root = logging.getLogger()
+        root.setLevel(logging.INFO)
+        handler = logging.StreamHandler(sys.stdout)
+        handler.setLevel(logging.INFO)
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        handler.setFormatter(formatter)
+        root.addHandler(handler)
         source = forum['name']
         base_url = f"https://{source}"
         full_url = f"{base_url}{forum['dump_list']}"
         options = webdriver.ChromeOptions()
         # TODO: need to document what os needs what path, and need to write that it takes about
+        if self.config.get_chrome_binary():
+            print("hello0")
+            service = Service(executable_path=self.config.get_chrome_binary())
+        else:
+            service = Service()
         if self.config.get_user_data_dir():
             options.add_argument(
                 f"--user-data-dir={self.config.get_user_data_dir()}"
                 )
-            options.headless = False
+            options.add_argument("disable-extensions")
             options.add_argument('--headless')
             options.add_argument('--no-sandbox')
             #options.add_argument('--incognito')
+            print(user_agent)
+            options.add_argument(f'--user-agent={user_agent}')
             options.add_argument('--disable-dev-shm-usage')
             options.add_argument('--remote-debugging-pipe')
-        driver = webdriver.Chrome(service=Service('./chrome'), options=options)
+            #options.add_argument('--remote-debugging-port=9222')
+        driver = webdriver.Chrome(service=service, options=options)
+        #driver = Driver(browser="chrome", uc=True, headless=True, user_data_dir=self.config.get_user_data_dir())
         logging.info("Retrieving posts")
         driver.get(full_url)
+        
+        driver.save_screenshot(f"{time.time()}.png")
         #table_id = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.ID, forum['tid'])))
         table_id = self.wait_for_element(driver, By.ID, forum['tid'])
+        driver.save_screenshot(f"{time.time()}.png")
+        
         rows = table_id.find_elements(By.TAG_NAME, "tr")
         tpc = self.config.get_ntfy_topic()
         for i in range(len(rows)):
@@ -55,11 +81,18 @@ class ForumScraper():
                     self.db.add_thread(forum['name'], thread)
                 driver.get(thread)
                 driver.save_screenshot("frontpage.png")
-                leak_content = self.wait_for_element(driver, By.XPATH, forum['post_content'])
-                leak_content = leak_content.text
+                
+                hidden_existed = False
+                leak_content = self.wait_for_element(driver, By.CLASS_NAME, forum['post_content'])
+                try:
+                    leak_content = leak_content.text
+                except AttributeError:
+                    continue
+                if forum['hidden'] in leak_content:
+                    hidden_existed = True
                 op = self.get_op(driver, forum)
                 self.grab_links(op, forum['name'], tpc)
-                if forum['unlike'] not in op.text:
+                if forum['unlike'] not in op.text and forum['hidden'] in op.text:
                     logging.info("Posts was not liked")
                     bottom_row = op.find_element(By.XPATH, forum['post_bottom'])
                     logging.info("Liking")
@@ -73,19 +106,22 @@ class ForumScraper():
                     logging.info("Posting reply")
                     reply_button = self.wait_for_element(driver, By.XPATH, forum['reply_post'])
                     reply_button.click()
+                    logging.info("Back to thread")
                     driver.get(thread)
+                    logging.info("Getting back the post after reply")
                     op = self.get_op(driver, forum)
-                    leak_content = op.find_element(By.XPATH, forum['post_content'])
+                    leak_content = op.find_element(By.CLASS_NAME, forum['post_content'])
                     leak_content = leak_content.text
                 logging.info("Checking for actual leaks")
                 output = self.parser.has_credentials(leak_content)
-                if output:
+                print('reached this part')
+                if output or (hidden_existed and forum['hidden'] not in leak_content):
                     filename = f"{self.basedir}T_{forum['name']}_{op.get_property('id')}"
-                    notify(tpc, f'Thread {thread} is probably a leak: {leak_content} with password {output}')
+                    notify(tpc, f'Thread {thread} is probably a leak: {leak_content} with content: {leak_content}')
                 else:
                     filename = f"{self.basedir}F_{forum['name']}_{op.get_property('id')}"
                     notify(tpc, f'Got thread {thread} post with text: {leak_content}')
-                self.parser.save_results(filename, thread, forum['name'])
+                self.parser.save_results(filename, leak_content, forum['name'])
                 logging.info("Waiting a bit to simulate humanity")
                 time.sleep(10)
                 # Reopen page, then reload rows array. Not doing this results in an error
@@ -95,8 +131,20 @@ class ForumScraper():
             except (NoSuchElementException, StaleElementReferenceException) as e:
                 logging.exception(f"{e}")
                 continue
+    """
+    Take a random message created by ChatGPT and then slightly adjusted by me
+    """
     def response(self):
-        return "thanks! :D"
+        thank_you_messages = [
+            "thx",
+            "ty :)",
+            "cool drop ^^",
+            "much appreciated",
+            "good stuff",
+            "thanks! :D",
+            "nice"
+        ]
+        return random.choice(thank_you_messages)
     """
     Wait for selenium element to exist
     """

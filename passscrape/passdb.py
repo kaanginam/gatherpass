@@ -69,7 +69,7 @@ class PassDB:
     def add_thread(self, source, url):
         cursor = self.connection.cursor()
         cursor.execute('create table if not exists thread (source TEXT, url TEXT, dt datetime default current_timestamp, UNIQUE(source,url))')
-        cursor.execute('insert into thread (source, url) values (?, ?, ?)', (source, url))
+        cursor.execute('insert into thread (source, url) values (?, ?)', (source, url))
         self.connection.commit()
     def thread_exists(self, source, url):
         cursor = self.connection.cursor()
