@@ -15,7 +15,6 @@ import sys
 import random
 import os
 from fake_useragent import UserAgent
-from seleniumbase import Driver
 """
 Deals with scanning forums using customised settings
 """

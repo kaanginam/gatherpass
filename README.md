@@ -6,6 +6,11 @@ This tool is meant to periodically scan paste pages and forums for possible leak
 - Provides tested configurations for quick start
 - Uses Google Indexing to search most recent pastes
 - Saves result in sqlite3
+
+## What does it really do
+
+Forum threads are scanned with basic python requests and selenium. However, paste pages are dealt with a bit more specifically: It uses the Google search engine, specifically Google Indexing, to search for recent pastes on Google. An example Google query to find the recent pastes from `pastebin.com` after 2024-05-19:
+`site:pastebin.com after:2024-05-19`
 ## Requirements
 1.  `python3.11`
 2.  `aspell-*`
@@ -166,6 +171,41 @@ For forums:
 | reply_post | Button to post the reply |
 | unlike | The text on the button if a post has been like before |
 | hidden | text that indicates that the content of the post is hidden |
+
+## Running the code
+
+After setting up the configuration, you can then perform scans through a cronjob that runs the script `cron_job.sh`.
+
+In general, there are 2 main functions: 
+1. `google_paste_scraper.py`
+2. `forum_scraper.py`
+
+You can also write your own main function if you wish to add more logging or if you wish to add this code to any existing code. To e.g. run the Google scraper, these are the necessary imports:
+```py
+from passscrape.leakparser import LeakParser
+from passscrape.passconfig import PassConfig
+from passscrape.googlescraper import GoogleScraper
+```
+Then you can initialize objects like this:
+```py
+# Getting the config object by using the class
+config = PassConfig('./conf.json')
+# Getting cookies from the class
+cookies = config.get_cookies()
+# This initializes the scraper, sets up a custom path to save pastes to
+scraper = GoogleScraper(cookies, today, config, 'pastes/')
+# Creates a parser, uses the password list
+parser = LeakParser(config.get_passlist(), config)
+# This is only needed if multiple pages exist
+for p in config.get_paste_pages():
+    scraper.scrape(parser, p)
+```
+The scraper takes the day to scan in this specific code. The format used is taken from the `datetime` module:
+```py
+from datetime import date, timedelta
+today = date.today() - timedelta(days=1)
+```
+Note that the last line subtracts a day from the `date.today()` output. This is because the Google keyword query uses the term `after:` to get newest results. So to get results from the last 24 hours, the day before today is used. 
 ## TODO
 - password heuristic: how big password list? determine how accurate it is in every leak I have, test until each leak is flagged
 - forum gathering: replies + subsequent leak gathering
