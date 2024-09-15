@@ -11,7 +11,7 @@ def notify(tpc, text):
     except requests.exceptions.ConnectionError as e:
         # Due to some limitations of the frequency of posting, a small sleep helps out sometimes.
         logging.info('Too many notifications, waiting...')
-        time.sleep(10)
+        time.sleep(30)
         try:
             requests.post(tpc, data=text.encode(encoding='utf-8'))
         except requests.exceptions.ConnectionError as e:

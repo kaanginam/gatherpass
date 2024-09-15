@@ -11,27 +11,28 @@ today = date.today() - timedelta(days=1)
 def main():
     # Load config
     config = PassConfig('./conf.json')
+    # Initialize scraper
+    scraper = GoogleScraper(
+        config.get_cookies(),
+        today,
+        ['https://www.reddit.com'],
+        config.get_ntfy_topic(),
+        config.get_debug(), 
+        'pastes/'
+    )
     # Initialize parser
     parser = LeakParser(
         config.get_passlist(), 
         config.get_seperators(),
         config.get_ignore_list(),
-        config.get_ratio(),
         config.get_any_pw()
         )
-    # Initialize scraper
-    scraper = GoogleScraper(
-        parser,
-        config.get_cookies(),
-        today,
-        config.get_urls_to_gather(),
-        config.get_ntfy_topic(),
-        config.get_debug(), 
-        'pastes/'
-    )
-    
+    with open("fpastes/T_pastebin.com_npXnt8DK.txt", "r") as f:
+        text = f.read()
     # Scan each paste page seperately for pastes
-    for p in config.get_paste_pages():
-        scraper.scrape(parser, p)
+    scraper.grab_links(text, {
+        "source": "https://www.redit.com",
+        "url": "https://tmp.com"
+        })
 if __name__ == "__main__":
     main()

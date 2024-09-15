@@ -11,6 +11,8 @@ This tool is meant to periodically scan paste pages and forums for possible leak
 
 Forum threads are scanned with basic python requests and selenium. However, paste pages are dealt with a bit more specifically: It uses the Google search engine, specifically Google Indexing, to search for recent pastes on Google. An example Google query to find the recent pastes from `pastebin.com` after 2024-05-19:
 `site:pastebin.com after:2024-05-19`
+
+To successfully gather the data from forums, you will *need* to log in once. Otherwise, you can not use the extra reply functionality of the code. But there are still leaks to find in forums.
 ## Requirements
 1.  `python3.11`
 2.  `aspell-*`
@@ -190,13 +192,23 @@ Then you can initialize objects like this:
 ```py
 # Getting the config object by using the class
 config = PassConfig('./conf.json')
-# Getting cookies from the class
-cookies = config.get_cookies()
-# This initializes the scraper, sets up a custom path to save pastes to
-scraper = GoogleScraper(cookies, today, config, 'pastes/')
-# Creates a parser, uses the password list
-parser = LeakParser(config.get_passlist(), config)
-# This is only needed if multiple pages exist
+# Initialize scraper
+scraper = GoogleScraper(
+    config.get_cookies(),
+    config.get_debug(),
+    config.get_urls_to_gather(),
+    config.get_ntfy_topic(),
+    today, 
+    'pastes/'
+)
+# Initialize parser
+parser = LeakParser(
+    config.get_passlist(), 
+    config.get_seperators(),
+    config.get_ignore_list(),
+    config.get_any_pw()
+    )
+# Scan each paste page seperately for pastes
 for p in config.get_paste_pages():
     scraper.scrape(parser, p)
 ```

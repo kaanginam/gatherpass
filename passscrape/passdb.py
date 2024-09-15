@@ -1,6 +1,5 @@
 import sqlite3
 import logging
-import os
 """
 Database manager that adds paste, checks if one exists and more.
 """
@@ -22,7 +21,6 @@ class PassDB:
         cursor.execute('insert or ignore into pastes (source, pasteid, text) values (?, ?, ?)', (source, pasteid, text))
         self.connection.commit()
         logging.info("Added paste")
-        # cursor.execute(
     def paste_exists(self, source, pasteid):
         cursor = self.connection.cursor()
         cursor.execute('create table if not exists pastes (source TEXT, pasteid TEXT, text TEXT, is_leak INTEGER DEFAULT 0, password TEXT DEFAULT NULL, dt datetime default current_timestamp, UNIQUE(source,pasteid))')
@@ -40,18 +38,13 @@ class PassDB:
         cursor.execute('update pastes set is_leak=1 where source = ? and pasteid = ?',(source, pasteid))
         cursor.execute('update pastes set password=? where source = ? and pasteid = ?',(pw, source, pasteid))
         self.connection.commit()
+        logging.info("Set paste in database to leak")
     def add_links(self, source, url):
         cursor = self.connection.cursor()
         cursor.execute('create table if not exists tlinks (source TEXT, url TEXT, dt datetime default current_timestamp, UNIQUE(source,url))')
         cursor.execute('insert or ignore into tlinks (source, url) values (?, ?)', (source, url))
         self.connection.commit()
-    def add_accounts_from_file(self, text, source, pasteid, parser):
-        for line in text.split('\n'):
-            retcode, sep = parser.check_patterns(text)
-            if retcode > 0:
-                user = line.strip().split(f"{sep}")[0]
-                pw = line.strip().split(f"{sep}")[1]
-                self.add_account(user, pw, source, pasteid)
+        logging.info("Added link to database")
     def add_account(self, user, pw, source, pasteid):
         cursor = self.connection.cursor()
         cursor.execute('create table if not exists accounts (user TEXT, pw TEXT, source TEXT, pasteid TEXT)')
@@ -63,33 +56,29 @@ class PassDB:
         cursor.execute('drop table pastes')
         cursor.execute('drop table topics')
         self.connection.commit()
-    def get_user(self, source, pasteid):
-        cursor = self.connection.cursor()
-        rows = cursor.execute('select ')
     def add_thread(self, source, url):
         cursor = self.connection.cursor()
-        cursor.execute('create table if not exists thread (source TEXT, url TEXT, dt datetime default current_timestamp, UNIQUE(source,url))')
+        cursor.execute('create table if not exists thread (source TEXT, url TEXT, text TEXT, dt datetime default current_timestamp, UNIQUE(source,url))')
         cursor.execute('insert into thread (source, url) values (?, ?)', (source, url))
         self.connection.commit()
+        logging.info("Added thread to database")
     def thread_exists(self, source, url):
         cursor = self.connection.cursor()
-        cursor.execute('create table if not exists thread (source TEXT, url TEXT, dt datetime default current_timestamp, UNIQUE(source,url))')
+        cursor.execute('create table if not exists thread (source TEXT, url TEXT, text TEXT, dt datetime default current_timestamp, UNIQUE(source,url))')
         self.connection.commit()
         rows = cursor.execute('select * from thread where source = ? and url = ?', (source, url)).fetchall()
         if len(rows) == 0:
+            logging.info("Thread is already in database")
             return False
         else:
+            logging.info("Thread not in database")
             return True
-    def add_topic(self, header, source):
-        cursor = self.connection.cursor()
-        cursor.execute('create table if not exists topics (header TEXT, source TEXT)')
-        cursor.execute('insert into topics (header, source) values (?, ?)', (header, source))
-    def check_topics(self, header, source):
-        cursor = self.connection.cursor()
-        rows = cursor.execute('select * from topic where header = ? and source = ?', (header, source)).fetchall()
-        if len(rows) == 0:
-            return False
-        else:
-            return True
-            
-        
+    """
+    Saves results of scanned paste to file for debug purposes
+    """
+    def save_results(self, filename, content, source):
+        from datetime import datetime
+        ct = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
+        with open(filename, 'w', encoding='utf-8') as f:
+            f.write(f'{ct} from {source}\n')
+            f.write(content)

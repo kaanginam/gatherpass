@@ -1,9 +1,4 @@
-import re
-import os
 import hashlib
-import requests
-import time
-from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 import enchant
 import logging
@@ -14,18 +9,12 @@ This class deals with the raw text of a potential leak, trying to check if there
 inside of it
 """
 class LeakParser:
-    def __init__(self, passlist, config):
+    def __init__(self, passlist, seperators, ignore_list, ratio, any_pw=False):
         self.passlist = self.get_lines(passlist)
-        self.config = config
-        self.words = []
-    def check_patterns(self, string):
-        retcode = 0
-        for sep in self.config.get_seperators():
-            p = re.compile(f"[^{sep}]*" + sep + f"{1}[^sep]*")
-            if p.match(string):
-                return retcode, sep
-            retcode += 1
-        return -1
+        self.seperators = seperators
+        self.ignore_list = ignore_list
+        self.ratio = ratio
+        self.any_pw = any_pw
     """
     Takes a line to check if it resolves as an URL
     """
@@ -58,32 +47,32 @@ class LeakParser:
     """
     Check if word is in words, increases count if it is
     """
-    def word_in_words(self, word):
+    def word_in_words(self, word, words):
         found = False
-        for w in self.words:
+        for w in words:
             if w["txt"] == word:
                 w["count"] += 1
                 found = True
         if not found and word != '' and word != '\n':
-            self.words.append({
+            words.append({
                 "txt": word, 
-                "count": 0,
+                "count": 1,
                 "is_pw": False
             })
+        return words
     """
-    Gets all the words in text and saves them in self.words.
+    Gets all the words in text and returns them.
     Skips newlines, empty words, URL
     """
     def get_words(self, text):
-        seperators = self.config.get_seperators()
+        seperators = self.seperators
         lines = text.split("\n")
+        words = []
         for line in lines:
-            if self.is_url(line):
+            if self.is_url(line) or line == '\n' or line == '':
                 continue
-            if line == '\n' or line == '':
-                continue
-            self.word_in_words(line)
-            wordsInLine = [line]
+            #words = self.word_in_words(line, words)
+            wordsInLine = []
             if " " in line:
                 for s in line.split(" "):
                     if s != '' and s != '\n':
@@ -93,48 +82,46 @@ class LeakParser:
                     if sep in word:
                         for s in word.split(sep): 
                             if s != '' and s != '\n':
-                                self.word_in_words(s)
+                                words = self.word_in_words(s, words)
                                 wordsInLine.append(s)        
-                self.word_in_words(word)
+                words = self.word_in_words(word, words)
+        return words
     """
     Gets the language of text, counts the amount of words from dict and passwords, then decides if it is a leak 
     """
     def has_credentials(self, text):
+        words = []
         lang = self.get_language(text)
         d = enchant.Dict(lang)
         pw_count = 0
-        self.get_words(text)
+        words = self.get_words(text)
         dict_count = 0
-        ignore_list = self.config.get_ignore_list()
-        for word in self.words:
-            # Checks if the word is in the created dictionary and also if it is not a digit
-            if d.check(word["txt"]) and not word["txt"].isdigit():
-                dict_count += 1
+        word_count = 0
+        for word in words:
             # Create sha1 hash of word because the password list is also hashes
             hexxed = hashlib.sha1(word["txt"].encode()).hexdigest()
+            # Checks if the word is in the created dictionary and also if it is not a digit
+            if d.check(word["txt"]) and not word["txt"].isdigit():
+                dict_count += word["count"]
             # Skip words that are only 1 character, make sure the hexxes match, ignore false positives
-            if (hexxed.upper() in self.passlist or hexxed in self.passlist) and word["txt"] not in ignore_list and len(word["txt"]) != 1:
-                pw_count += 1
+            if (hexxed.upper() in self.passlist or hexxed in self.passlist) and word["txt"] not in self.ignore_list and len(word["txt"]) != 1:
+                pw_count += word["count"]
                 word["is_pw"] = True
+            word_count += word["count"]
         logging.info(f'pw_count: {pw_count}, dict_count: {dict_count}, ratio: {pw_count/dict_count if dict_count != 0 else 0}')
         # No words in text
-        if len(self.words) == 0:
-            return False, self.words
-        if (dict_count > pw_count  and dict_count/len(self.words) > 0.2 and pw_count/dict_count < 0.3) or pw_count == 0: 
-            print(f'Has no leaks, PWs: {pw_count}, Ws in dict: {dict_count}, ratio dict/numwords: {dict_count/len(self.words)}, num words: {len(self.words)}, top3: {sorted(self.words, key=lambda d: d["count"], reverse=True)[0:3]}')
-            return False, self.words
+        if len(words) == 0:
+            return False, words
+        if self.any_pw and pw_count > 0:
+            return True, words
+        elif (dict_count > pw_count  and dict_count/word_count > 0.2 and pw_count/dict_count < self.ratio) or pw_count == 0: 
+            print(f'Has no leaks, PWs: {pw_count}, Ws in dict: {dict_count}, ratio dict/numwords: {0 if word_count == 0 else dict_count/word_count}, num words: {word_count}, ratio {0 if dict_count == 0 else pw_count/dict_count}, top3: {sorted(words, key=lambda d: d["count"], reverse=True)[0:3]}')
+            return False, words
         else:
-            print(f'Has leaks, PWs: {pw_count}, Ws in dict: {dict_count}, ratio dict/numwords: {dict_count/len(self.words)}, num words: {len(self.words)}, top3: {sorted(self.words, key=lambda d: d["count"], reverse=True)[0:3]}')
-            return True, self.words
-    """
-    Saves results of scanned paste to file for debug purposes
-    """
-    def save_results(self, filename, content, source):
-        from datetime import datetime
-        ct = datetime.today().strftime('%Y-%m-%d %H:%M:%S')
-        with open(filename, 'w', encoding='utf-8') as f:
-            f.write(f'{ct} from {source}\n')
-            f.write(content)
+            words_are_pw = [w for w in words if w['is_pw'] == True]
+            print(f'Has leaks, PWs: {pw_count}, Ws in dict: {dict_count}, ratio dict/numwords: {dict_count/len(words)}, num words: {len(words)}, ratio {0 if dict_count == 0 else pw_count/dict_count}, pws: {words_are_pw}')
+            return True, words
+    
     """
     Get all the lines from text
     """

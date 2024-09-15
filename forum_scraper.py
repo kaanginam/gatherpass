@@ -1,17 +1,30 @@
 from passscrape.leakparser import LeakParser
 from passscrape.passconfig import PassConfig
 from passscrape.forumscraper import ForumScraper
-config = PassConfig('./conf.json')
 """
-Main function to scrape forum
+Main function to scrape forums
 """
 def main():
-    parser = LeakParser(config.get_passlist(), config)
-    scr = ForumScraper(config.get_urls_to_gather(), parser, config, '', 'threads/')
+    config = PassConfig('./conf.json')
+    parser = LeakParser(
+        config.get_passlist(), 
+        config.get_seperators(),
+        config.get_ignore_list(),
+        config.get_ratio(),
+        config.get_any_pw()
+    )
+    scr = ForumScraper(
+        config.get_urls_to_gather(), 
+        parser,
+        config.get_user_data_dir(),
+        config.get_chrome_binary(),
+        config.get_ntfy_topic(), 
+        config.get_debug(),
+        prefix='', 
+        basedir='threads/'
+    )
     # For each forum, scrape using created parser
     for forum in config.get_forums():
-        if 'nulled' in forum['name']:
-            continue
         scr.scrape(forum)
     
 if __name__ == "__main__":

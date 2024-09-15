@@ -38,6 +38,10 @@ class PassConfig:
         return self.get_key('db_conn_str')
     def get_ignore_list(self) -> list:
         return self.get_key('ignore_list')
+    def get_debug(self) -> bool:
+        return self.get_key('DEBUG')
+    def get_any_pw(self) -> bool:
+        return self.get_key('any_pw')
     def get_key(self, key):
         try:
             value = self.config[key]

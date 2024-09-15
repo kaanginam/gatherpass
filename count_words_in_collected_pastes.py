@@ -140,7 +140,13 @@ config = PassConfig("./conf.json")
 
 i = 0
 for fn in fns:
-    parser = LeakParser("password_list_hashes_3.txt", config)
+    parser = LeakParser(
+        config.get_passlist(), 
+        config.get_seperators(),
+        config.get_ignore_list(),
+        config.get_ratio(),
+        config.get_any_pw()
+    )
     if fn == "6SK1B5fz8zBun5gSG1BxCY.txt" or fn == "paste2.org.43":
         continue
     if i == 100:
