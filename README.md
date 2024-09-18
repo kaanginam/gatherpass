@@ -1,5 +1,5 @@
 # gatherpass
-This tool is meant to periodically scan paste pages and forums for possible leaks. It allows full customization of both, as well as the option to setup conditions for the detection
+This tool is meant to periodically scan paste pages and forums for possible leaks. It allows full customization of both, as well as the option to setup conditions for the detection.
 ## Features
 - Notification via [ntfy](https://ntfy.sh/) (**NOTE**: Using the public ntfy server means your notifications are available in cleartext to the public ntfy server. Only use the public server if you are fine with this, otherwise use a self hosted version)
 - Scanning pastes or hacker forums for leaks using custom rules and password lists
@@ -222,7 +222,9 @@ Note that the last line subtracts a day from the `date.today()` output. This is 
 - password heuristic: how big password list? determine how accurate it is in every leak I have, test until each leak is flagged
 - forum gathering: replies + subsequent leak gathering
 - word splitting
-- 
+- aktivitätsdiagramm, stakeholder analysis, anforderungsanalyse, stakeholders, sicherheitsforscher, paste sites, software desing, rumspinnnen
+- Create script that finds optimal ratio for me lmao, why did i not think of this
+- max/min function, easy code
 ```sh
 az webapp config storage-account add \
 --resource-group <resource-group> \

@@ -1,6 +1,7 @@
 from passscrape.leakparser import LeakParser
 from passscrape.passconfig import PassConfig
 from passscrape.forumscraper import ForumScraper
+import sys
 """
 Main function to scrape forums
 """
@@ -23,9 +24,12 @@ def main():
         prefix='', 
         basedir='threads/'
     )
+    login = False
+    if len(sys.argv) > 1 and sys.argv[1] == 'login':
+        login = True
     # For each forum, scrape using created parser
     for forum in config.get_forums():
-        scr.scrape(forum)
+        scr.scrape(forum, login)
     
 if __name__ == "__main__":
     main()

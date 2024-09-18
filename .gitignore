@@ -1,3 +1,6 @@
+.vscode
+test_*
+*_test*
 conf*.json
 combo_counting/**
 combo_counting2/**

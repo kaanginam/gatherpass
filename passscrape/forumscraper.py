@@ -1,6 +1,4 @@
-# from seleniumbase import BaseCase
 from selenium import webdriver
-import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.service import Service
@@ -31,7 +29,7 @@ class ForumScraper():
     """
     Using a given forum object, scrape it
     """    
-    def scrape(self, forum):
+    def scrape(self, forum, login=False):
         # Obtaining a random user agent
         ua = UserAgent()
         user_agent = ua.random
@@ -56,11 +54,8 @@ class ForumScraper():
         if self.user_data_dir:
             options.add_argument(f"--user-data-dir={self.user_data_dir}")
         options.add_argument("disable-extensions")
-        if os.path.isdir(self.user_data_dir):
+        if os.path.isdir(self.user_data_dir) and not login:
             options.add_argument('--headless')
-        else:
-            breakpoint()
-            return
         options.add_argument('--no-sandbox')
         options.add_argument(f'--user-agent={user_agent}')
         options.add_argument('--disable-dev-shm-usage')
@@ -68,6 +63,9 @@ class ForumScraper():
         driver = webdriver.Chrome(service=service, options=options)
         logging.info("Retrieving posts")
         driver.get(full_url)
+        if login:
+            breakpoint()
+            return
         if self.debug:
             driver.save_screenshot(f"{forum['name']}-{time.time()}.png")
         table_id = self.wait_for_element(driver, By.ID, forum['tid'])
@@ -159,6 +157,9 @@ class ForumScraper():
         except TimeoutException as e:
             logging.exception(f"{e}")
             return None
+    """
+    Get text of the first post of thread, by the original poster
+    """
     def get_op(self, driver, forum):
         posts = self.wait_for_element(driver, By.ID, forum['posts'])
         divs = posts.find_elements(By.XPATH, f'//div[@class="{forum["post_body"]}"]')
