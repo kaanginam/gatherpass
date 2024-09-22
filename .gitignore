@@ -39,6 +39,7 @@ firefox-data
 user-data
 fpastes*.txt
 pastes_counting2.txt
+X_*
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

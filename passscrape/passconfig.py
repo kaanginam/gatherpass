@@ -10,12 +10,6 @@ class PassConfig:
             self.config = json.load(f)
     def get_paste_pages(self) -> list:
         return self.get_key("page_list")
-    def get_engines(self) -> list:
-        return self.get_key("search_engine")
-    def get_search_terms(self) -> list:
-        return self.get_key("search_term")
-    def get_providers(self) -> list:
-        return self.get_key('providers')
     def get_passlist(self) -> str:
         return self.get_key('passlist')
     def get_cookies(self) -> dict:

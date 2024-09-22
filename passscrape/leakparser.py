@@ -69,7 +69,7 @@ class LeakParser:
         lines = text.split("\n")
         words = []
         for line in lines:
-            if self.is_url(line) or line == '\n' or line == '':
+            if line == '\n' or line == '':
                 continue
             #words = self.word_in_words(line, words)
             wordsInLine = [line]
@@ -79,7 +79,7 @@ class LeakParser:
                         wordsInLine.append(s)
             for word in wordsInLine:
                 for sep in seperators:
-                    if sep in word:
+                    if sep in word and not self.is_url(word):
                         for s in word.split(sep): 
                             if s != '' and s != '\n':
                                 words = self.word_in_words(s, words)
@@ -104,7 +104,7 @@ class LeakParser:
             if d.check(word["txt"]) and not word["txt"].isdigit():
                 dict_count += word["count"]
             # Skip words that are only 1 character, make sure the hexxes match, ignore false positives
-            if (hexxed.upper() in self.passlist or hexxed in self.passlist) and word["txt"] not in self.ignore_list and len(word["txt"]) != 1:
+            if (hexxed.upper() in self.passlist or hexxed in self.passlist) and word["txt"] not in self.ignore_list: # and len(word["txt"]) != 1:
                 pw_count += word["count"]
                 word["is_pw"] = True
             word_count += word["count"]
@@ -116,7 +116,7 @@ class LeakParser:
         if self.any_pw and pw_count > 0:
             print("has just 1 pw words")
             return True, words
-        elif (pw_count/dict_count < self.ratio and dict_count/word_count > 0.2) or pw_count == 0: 
+        elif (dict_count !=0 and dict_count < pw_count and pw_count/dict_count < self.ratio) or pw_count == 0: 
             print(f'Has no leaks, PWs: {pw_count}, Ws in dict: {dict_count}, ratio dict/numwords: {0 if word_count == 0 else dict_count/word_count}, num words: {word_count}, ratio {0 if dict_count == 0 else pw_count/dict_count}, top3: {sorted(words, key=lambda d: d["count"], reverse=True)[0:3]}')
             return False, words
         else:

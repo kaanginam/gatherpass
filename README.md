@@ -64,17 +64,6 @@ Before running either of the scripts, it is important to configure the scan by c
             "reverse": true
         }
     ],
-    "search_engine": [
-        "google.com",
-        "bing.com"
-    ],
-    "providers": [
-        "@gmail.com",
-        "@yahoo.com",
-        "@outlook.com",
-        "@gmx.de",
-        "@web.de"
-    ],
     "cookies": {
         "CONSENT": "PENDING+987",
         "SOCS": "CAESHAgBEhJnd3NfMjAyMzA4MTAtMF9SQzIaAmRlIAEaBgiAo_CmBg"
@@ -84,18 +73,11 @@ Before running either of the scripts, it is important to configure the scan by c
         "|",
         ";"
     ],
-    "passlist": "password_list_hashes.txt",
+    "passlist": "password_list_hashes_3.txt",
     "urls_to_gather": [
         "https://t.me"
     ],
     "forums": [
-        {
-            "name": "www.nulled.to",
-            "login_uri": "",
-            "dump_list": "/forum/184-dumps-databases/?sort_key=start_date",
-            "topics": "/topic",
-            "tid": "forum_table"
-        },
         {
             "name": "cracked.io",
             "login_uri": "/member.php?action=login",
@@ -105,7 +87,28 @@ Before running either of the scripts, it is important to configure the scan by c
             "quote": "postbit_quote",
             "posts": "posts",
             "post_body": "post-set",
-            "post_content": "//div[2]/div[4]/div/div/div[5]/table/tbody/tr/td/div/div/div[1]/div[2]/div[3]/div[2]",
+            "post_content": "post-content",
+            "post_content3": "//div[2]/div[4]/div/div/div[5]/table/tbody/tr/td/div/div/div[1]/div[2]/div[3]/div[2]/div/div[2]",
+            "post_content2": "//div[3]/div[4]/div/div/div[3]/table[1]/tbody/tr/td/div/div/div[1]/div[2]/div[3]/div[2]/div/div[2]",
+            "post_bottom": "//div[2]/div[4]/div/div/div[5]/table/tbody/tr/td/div/div/div[1]/div[2]/div[4]/div/div/div[2]",
+            "reply_body_iframe": "//div[@id='content']/div/div/form/table/tbody/tr[5]/td/div/div/div/iframe",
+            "reply_body": "//body/br",
+            "reply_post": "//body/div[2]/div[4]/div/div/form/div/input[1]",
+            "unlike": "UNLIKE",
+            "hidden": "Hidden Content\nYou must reply to this thread to view this content or upgrade your account.\n\nNote: Upgrade your account to see all hidden content on every post without replying and prevent getting banned."
+        },
+        {
+            "name": "cracked.io",
+            "login_uri": "/member.php?action=login",
+            "dump_list": "/Forum-Combolists--297?sortby=started&order=desc&datecut=9999&prefix=0",
+            "tid": "topiclist",
+            "thanks": "//a[@class='postbit_thanks add_tyl_button']",
+            "quote": "postbit_quote",
+            "posts": "posts",
+            "post_body": "post-set",
+            "post_content": "post-content",
+            "post_content3": "//div[2]/div[4]/div/div/div[5]/table/tbody/tr/td/div/div/div[1]/div[2]/div[3]/div[2]/div/div[2]",
+            "post_content2": "//div[3]/div[4]/div/div/div[3]/table[1]/tbody/tr/td/div/div/div[1]/div[2]/div[3]/div[2]/div/div[2]",
             "post_bottom": "//div[2]/div[4]/div/div/div[5]/table/tbody/tr/td/div/div/div[1]/div[2]/div[4]/div/div/div[2]",
             "reply_body_iframe": "//div[@id='content']/div/div/form/table/tbody/tr[5]/td/div/div/div/iframe",
             "reply_body": "//body/br",
@@ -114,14 +117,17 @@ Before running either of the scripts, it is important to configure the scan by c
             "hidden": "Hidden Content\nYou must reply to this thread to view this content or upgrade your account.\n\nNote: Upgrade your account to see all hidden content on every post without replying and prevent getting banned."
         }
     ],
-    "ratio": 0.3,
+    "ratio": 0.0695,
     "user_data": "./chrome-data",
-    "chrome_binary": "",
+    "user_data_tmp_": "C:/Users/username/AppData/Local/Google/Chrome/User Data",
+    "chrome_binary_tmp": "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe",
+    "chrome_binary": "/usr/bin/chromedriver",
     "ntfy_topic": "https://ntfy.sh/mVwSOeEKHBKoR57y",
-    "thread_ignore_pw": ["#1"],
-    "pastes": "pastes/", 
+    "pastes": "pastes/",
     "threads": "threads/",
-    "ignore_list": ["--", "#include", "public", "import", "class", "NULL", "True", "true"]
+    "ignore_list": ["--", "#include", "public", "import", "class", "NULL", "True", "true", "//", "#1"],
+    "DEBUG": true,
+    "any_pw": false
 }
 ```
 
@@ -145,6 +151,8 @@ Some of these variables you will have to define yourself. If you want to scan a 
 | pastes | Folder to save the pastes to (needs to be created in advance) |
 | threads | Folder to save threads to (needs to be created in advance) |
 | ignore_list | List of passwords to ignore |
+| DEBUG | Set this value to true if you wish to have the output of the logging package to your console |
+| any_pw | The LeakParser will detect any text as a leak if it has found at least one password from the password list |
 
 
 For pastes:
@@ -225,14 +233,4 @@ Note that the last line subtracts a day from the `date.today()` output. This is 
 - aktivitätsdiagramm, stakeholder analysis, anforderungsanalyse, stakeholders, sicherheitsforscher, paste sites, software desing, rumspinnnen
 - Create script that finds optimal ratio for me lmao, why did i not think of this
 - max/min function, easy code
-```sh
-az webapp config storage-account add \
---resource-group <resource-group> \
---name <function-app-name> \
---custom-id az-files-001 \
---storage-type AzureFiles \
---account-name <storage-account-name> \
---share-name <file-share-name> \
---access-key <storage-account-access-key> \
---mount-path /fx-files
-```
+- old ignore list ["--", "#include", "public", "import", "class", "NULL", "True", "true", "//"],
