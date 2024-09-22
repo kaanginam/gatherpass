@@ -1,4 +1,5 @@
 .vscode
+*gathered
 test_*
 *_test*
 conf*.json

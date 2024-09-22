@@ -104,7 +104,7 @@ class LeakParser:
             if d.check(word["txt"]) and not word["txt"].isdigit():
                 dict_count += word["count"]
             # Skip words that are only 1 character, make sure the hexxes match, ignore false positives
-            if (hexxed.upper() in self.passlist or hexxed in self.passlist) and word["txt"] not in self.ignore_list: # and len(word["txt"]) != 1:
+            if (hexxed.upper() in self.passlist or hexxed in self.passlist) and word["txt"] not in self.ignore_list and len(word["txt"]) != 1:
                 pw_count += word["count"]
                 word["is_pw"] = True
             word_count += word["count"]
@@ -114,7 +114,7 @@ class LeakParser:
             return False, words
         if self.any_pw and pw_count > 0:
             return True, words
-        elif (dict_count !=0 and dict_count < pw_count and pw_count/dict_count < self.ratio) or pw_count == 0: 
+        elif (dict_count !=0 and pw_count/dict_count < self.ratio) or pw_count == 0: 
             return False, words
         else:
             return True, words

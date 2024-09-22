@@ -200,22 +200,24 @@ Then you can initialize objects like this:
 ```py
 # Getting the config object by using the class
 config = PassConfig('./conf.json')
-# Initialize scraper
-scraper = GoogleScraper(
-    config.get_cookies(),
-    config.get_debug(),
-    config.get_urls_to_gather(),
-    config.get_ntfy_topic(),
-    today, 
-    'pastes/'
-)
 # Initialize parser
 parser = LeakParser(
     config.get_passlist(), 
     config.get_seperators(),
     config.get_ignore_list(),
+    config.get_ratio(),
     config.get_any_pw()
-    )
+)
+# Initialize scraper
+scraper = GoogleScraper(
+    parser,
+    config.get_cookies(),
+    today,
+    config.get_urls_to_gather(),
+    config.get_ntfy_topic(),
+    config.get_debug(), 
+    'pastes/'
+)
 # Scan each paste page seperately for pastes
 for p in config.get_paste_pages():
     scraper.scrape(parser, p)
