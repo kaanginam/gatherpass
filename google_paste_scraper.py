@@ -4,6 +4,7 @@ from passscrape.leakparser import LeakParser
 from passscrape.passconfig import PassConfig
 from passscrape.googlescraper import GoogleScraper
 import sys
+import logging
 """
 Main command to run scraper
 """
@@ -29,9 +30,17 @@ def main():
         config.get_debug(), 
         'pastes/'
     )
-    
+    if config.get_debug():
+        root = logging.getLogger()
+        root.setLevel(logging.INFO)
+        handler = logging.StreamHandler(sys.stdout)
+        handler.setLevel(logging.INFO)
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        handler.setFormatter(formatter)
+        root.addHandler(handler)
     # Scan each paste page seperately for pastes
     for p in config.get_paste_pages():
+        logging.info(f"Scanning paste page {p['site']}")
         scraper.scrape(parser, p)
 if __name__ == "__main__":
     main()

@@ -41,7 +41,8 @@ class GoogleScraper():
                 pasteurl = a['href'].split('&')[0].split('=')[1]
                 # Paste pages use an id, get that
                 pasteid = pasteurl.split('/')[-1] if pasteurl[-1] != '/' else pasteurl[:-1].split('/')[-1]
-                
+                # Some pasteids scanned included this specific character. It is not compatible with the rest of
+                # the code and is hence removed.
                 if r'%3F' in pasteid:
                     pasteid = pasteid.split(r'%3F')[0]
                 if self.db.paste_exists(p['site'], pasteid):
@@ -51,8 +52,6 @@ class GoogleScraper():
                 full_url = f"https://{p['site']}/{str(pasteid)}{p['dl']}" if 'reverse' in p and p['reverse'] else f"https://{p['site']}/{p['dl']}{str(pasteid)}"
                 res = requests.get(full_url)
                 text = res.text
-                # Do not check pastes already in database
-                
                 logging.info(f'Found a new paste')
                 self.db.add_paste(p['site'], pasteid, text)
                 output, words = self.parser.has_credentials(text)
@@ -69,6 +68,7 @@ class GoogleScraper():
                 else:
                     addition = 'F_'
                 filename = self.basedir + addition + filename
+                logging.info(f"Saving text of paste to {filename}")
                 self.db.save_results(filename, text, p['site'])
     # Gets all links from a text based on which links
     # are supposed to be gathered

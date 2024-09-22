@@ -174,5 +174,6 @@ class ForumScraper():
         for url in self.urls_to_gather:
             for href in hrefs:
                 if url in href['href']:
+                    logging.info(f'Adding link {url} to database')
                     self.db.add_links(fname, href['href'])
                     notify(tpc, f"Got link {href['href']} from {fname}")
