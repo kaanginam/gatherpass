@@ -57,7 +57,7 @@ class GoogleScraper():
                 output, words = self.parser.has_credentials(text)
                 addition = ''
                 if output:
-                    msg = f"A commonly used password was found on {p['site']}: {pasteurl}. The password was {[w for w in words if w['is_pw']]}"
+                    msg = f"A commonly used password was found on {p['site']}: {pasteurl}"
                     logging.info(msg)
                     if tpc:
                         notify(tpc, msg)

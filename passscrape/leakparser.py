@@ -57,7 +57,8 @@ class LeakParser:
             words.append({
                 "txt": word, 
                 "count": 1,
-                "is_pw": False
+                "is_pw": False,
+                "is_dict": False
             })
         return words
     """
@@ -103,6 +104,7 @@ class LeakParser:
             # Checks if the word is in the created dictionary and also if it is not a digit
             if d.check(word["txt"]) and not word["txt"].isdigit():
                 dict_count += word["count"]
+                word["is_dict"] = True
             # Skip words that are only 1 character, make sure the hexxes match, ignore false positives
             if (hexxed.upper() in self.passlist or hexxed in self.passlist) and word["txt"] not in self.ignore_list and len(word["txt"]) != 1:
                 pw_count += word["count"]
